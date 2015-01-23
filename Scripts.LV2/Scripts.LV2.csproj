@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{AEBFF9B2-BD64-49D3-8981-BCF00E61BB5B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ConsoleApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Lokai Skills System\Building\Core\BuildContext.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildGroup.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildGroupCol.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildGump.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildGumpItem.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildItem.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildItemCol.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildItemIDAttribute.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildLokaiSkill.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildLokaiSkillCol.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildRes.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildResCol.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildResources.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildSubRes.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildSubResCol.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\BuildSystem.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\CustomBuild.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\Enhance.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\QueryMakersMarkGump.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\Recipes.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\Repair.cs" />
+    <Compile Include="Lokai Skills System\Building\Core\Resmelt.cs" />
+    <Compile Include="Lokai Skills System\Building\Definitions\DefBrickLaying.cs" />
+    <Compile Include="Lokai Skills System\Building\Definitions\DefCooperage.cs" />
+    <Compile Include="Lokai Skills System\Building\Definitions\DefFraming.cs" />
+    <Compile Include="Lokai Skills System\Building\Definitions\DefRoofing.cs" />
+    <Compile Include="Lokai Skills System\Building\Definitions\DefStoneMasonry.cs" />
+    <Compile Include="Lokai Skills System\Building\Items\BaseBuildingTool.cs" />
+    <Compile Include="Lokai Skills System\Building\Items\BrickLayersTool.cs" />
+    <Compile Include="Lokai Skills System\Building\Items\FramingTool.cs" />
+    <Compile Include="Lokai Skills System\Building\Items\HouseRecipes.cs" />
+    <Compile Include="Lokai Skills System\Building\Items\RoofersTool.cs" />
+    <Compile Include="Lokai Skills System\Building\Items\StoneMasonsTool.cs" />
+    <Compile Include="Lokai Skills System\Building\Items\WoodworkersTool.cs" />
+    <Compile Include="Lokai Skills System\Building\Mobiles\Foreman.cs" />
+    <Compile Include="Lokai Skills System\Building\Mobiles\SBForeman.cs" />
+    <Compile Include="Lokai Skills System\Building\ResourceItems\BasePieces.cs" />
+    <Compile Include="Lokai Skills System\Building\ResourceItems\Doors.cs" />
+    <Compile Include="Lokai Skills System\Building\ResourceItems\Flooring.cs" />
+    <Compile Include="Lokai Skills System\Building\ResourceItems\Foundations.cs" />
+    <Compile Include="Lokai Skills System\Building\ResourceItems\Panels.cs" />
+    <Compile Include="Lokai Skills System\Building\ResourceItems\Roofing.cs" />
+    <Compile Include="Lokai Skills System\Building\ResourceItems\Stairs.cs" />
+    <Compile Include="Lokai Skills System\Building\ResourceItems\Supplies.cs" />
+    <Compile Include="Lokai Skills System\Building\ResourceItems\Walls.cs" />
+    <Compile Include="Lokai Skills System\Building\ResourceItems\Windows.cs" />
+    <Compile Include="Lokai Skills System\Core\LokaiSkill.cs" />
+    <Compile Include="Lokai Skills System\Core\LokaiSkillAttachments.cs" />
+    <Compile Include="Lokai Skills System\Core\LokaiSkillInfo.cs" />
+    <Compile Include="Lokai Skills System\Core\LokaiSkillMods.cs" />
+    <Compile Include="Lokai Skills System\Core\LokaiSkillName.cs" />
+    <Compile Include="Lokai Skills System\Core\LokaiSkills.cs" />
+    <Compile Include="Lokai Skills System\Core\LokaiSkillsBag.cs" />
+    <Compile Include="Lokai Skills System\Core\LokaiSkillsCommands.cs" />
+    <Compile Include="Lokai Skills System\Core\LokaiSkillUtilities.cs" />
+    <Compile Include="Lokai Skills System\Core\MasterLokaiSkillItem.cs" />
+    <Compile Include="Lokai Skills System\Gumps\LokaiSkillsGump.cs" />
+    <Compile Include="Lokai Skills System\Gumps\ShowLokaiSkillsGump.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\Butchering.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\Commerce.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\Hypnotism.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\Linguistics.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\PickPocket.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\Pilfering.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\Riding.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\Sailing.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\Skinning.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\SpeakToAnimals.cs" />
+    <Compile Include="Lokai Skills System\Lokai Skills\Ventriloquism.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\Emote.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\Enhanced Items\ButchersCleaver.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\Enhanced Items\PilferingGloves.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\Enhanced Items\RidingCape.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\Enhanced Items\SkinningDagger.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\Enhanced Items\VentriloquistsGorget.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\LokaiSkillBall.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\RawCotton.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\RawFlax.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\RawWool.cs" />
+    <Compile Include="Lokai Skills System\Supporting Files\YarnsAndThreads.cs" />
+    <Compile Include="Lokai Skills System\Tree Harvest System\TreeHarvest.cs" />
+    <Compile Include="Lokai Skills System\Tree Harvest System\TreeHarvestTool.cs" />
+    <Compile Include="Lokai Skills System\Tree Harvest System\TreeProducts.cs" />
+    <Compile Include="Lokai Skills System\Tree Harvest System\TreeResources.cs" />
+    <Compile Include="Lokai Skills System\WoodWorking\DefWoodworking.cs" />
+    <Compile Include="Lokai Skills System\WoodWorking\UnfinishedFurniture.cs" />
+    <Compile Include="Lokai Skills System\WoodWorking\WoodWorkersBenchEast.cs" />
+    <Compile Include="ShardEvent with AP_EventGate\AP_EventGate.cs" />
+    <Compile Include="ShardEvent with AP_EventGate\ShardEvent.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Scripts\Scripts.csproj">
+      <Project>{308ea7c6-2873-4e47-af3f-abba3f8ab63e}</Project>
+      <Name>Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server\Server.csproj">
+      <Project>{ae4a9eaa-e0eb-4dc9-9604-be4289f9f6c3}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>

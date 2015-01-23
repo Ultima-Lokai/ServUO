@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{932A19E3-4A96-4476-ADB9-7AE1218644CA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ConsoleApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Addon2Static.cs" />
+    <Compile Include="Bible System\Bible.cs" />
+    <Compile Include="Bible System\BibleGump.cs" />
+    <Compile Include="Bible System\BibleReader.cs" />
+    <Compile Include="Bible System\ConfigurePreacher.cs" />
+    <Compile Include="Bible System\CustomGump.cs" />
+    <Compile Include="Bible System\PreacherGump.cs" />
+    <Compile Include="Bible System\RecitalTimer.cs" />
+    <Compile Include="Bible System\TopicGump.cs" />
+    <Compile Include="Bible System\TopicParse.cs" />
+    <Compile Include="Bible System\TopicReader.cs" />
+    <Compile Include="Bible System\WanderingPreacher.cs" />
+    <Compile Include="GetImage.cs" />
+    <Compile Include="GoldPanning\GoldNuggets.cs" />
+    <Compile Include="GoldPanning\GoldNuggetTrader.cs" />
+    <Compile Include="GoldPanning\GoldPan.cs" />
+    <Compile Include="GoldPanning\GoldPanningSystem.cs" />
+    <Compile Include="GoldPanning\SBPanner.cs" />
+    <Compile Include="GoldPanning\SelfReplicatingPuzzleBox.cs" />
+    <Compile Include="House Paint System\HousePaint.cs" />
+    <Compile Include="House Paint System\HousePaints.cs" />
+    <Compile Include="House Paint System\PaintCan.cs" />
+    <Compile Include="House Paint System\PaintDyes.cs" />
+    <Compile Include="House Paint System\PaintedItem.cs" />
+    <Compile Include="Music System\LogHelper.cs" />
+    <Compile Include="Music System\Mix.cs" />
+    <Compile Include="Music System\Music.cs" />
+    <Compile Include="Music System\PianoAddon.cs" />
+    <Compile Include="Music System\Play.cs" />
+    <Compile Include="Music System\SynthGump.cs" />
+    <Compile Include="Music System\XmlMusic.cs" />
+    <Compile Include="ProvingGroundAddon.cs" />
+    <Compile Include="SearchImage.cs" />
+    <Compile Include="SkillBall.cs" />
+    <Compile Include="StaticExporter.cs" />
+    <Compile Include="Yard System\Core\ContextMenuEntries.cs" />
+    <Compile Include="Yard System\Core\YardGump.cs" />
+    <Compile Include="Yard System\Core\YardRegistry.cs" />
+    <Compile Include="Yard System\Core\YardSecurityGump.cs" />
+    <Compile Include="Yard System\Core\YardSettings.cs" />
+    <Compile Include="Yard System\Core\YardSystem.cs" />
+    <Compile Include="Yard System\Core\YardTarget.cs" />
+    <Compile Include="Yard System\Core\YGSettingsGump.cs" />
+    <Compile Include="Yard System\Items\YardDecorator.cs" />
+    <Compile Include="Yard System\Items\YardGate.cs" />
+    <Compile Include="Yard System\Items\YardItem.cs" />
+    <Compile Include="Yard System\Items\YardShovel.cs" />
+    <Compile Include="Yard System\Items\YardStair.cs" />
+    <Compile Include="YardItem2Static.cs" />
+    <Compile Include="[2.0]AddonGenerator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Scripts\Scripts.csproj">
+      <Project>{308ea7c6-2873-4e47-af3f-abba3f8ab63e}</Project>
+      <Name>Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server\Server.csproj">
+      <Project>{ae4a9eaa-e0eb-4dc9-9604-be4289f9f6c3}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>
