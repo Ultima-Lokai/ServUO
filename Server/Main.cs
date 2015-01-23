@@ -41,7 +41,20 @@ namespace Server
 		private static bool m_HaltOnWarning;
 		private static bool m_VBdotNET;
 		private static MultiTextWriter m_MultiConOut;
-		private static OpenUOSDK _OpenUOSDK;
+        private static OpenUOSDK _OpenUOSDK;
+
+        #region Lokai Versioning
+        private static bool m_LV1 = false;
+        private static bool m_LV2 = false;
+        private static bool m_LV3 = false;
+        private static bool m_LV4 = false;
+        private static bool m_LV5 = false;
+        public static bool LV1 { get { return m_LV1; } }
+        public static bool LV2 { get { return m_LV2; } }
+        public static bool LV3 { get { return m_LV3; } }
+        public static bool LV4 { get { return m_LV4; } }
+        public static bool LV5 { get { return m_LV5; } }
+        #endregion
 
 		private static bool m_Profiling;
 		private static DateTime m_ProfileStart;
@@ -440,7 +453,20 @@ namespace Server
 				else if (Insensitive.Equals(args[i], "-vb"))
 				{
 					m_VBdotNET = true;
-				}
+                }
+
+                #region Lokai Versioning
+                else if (Insensitive.Equals(args[i], "-lv1"))
+                    m_LV1 = true;
+                else if (Insensitive.Equals(args[i], "-lv2"))
+                    m_LV2 = true;
+                else if (Insensitive.Equals(args[i], "-lv3"))
+                    m_LV3 = true;
+                else if (Insensitive.Equals(args[i], "-lv4"))
+                    m_LV4 = true;
+                else if (Insensitive.Equals(args[i], "-lv5"))
+                    m_LV5 = true;
+                #endregion
 			}
 
 			try
@@ -677,7 +703,24 @@ namespace Server
 				if (m_VBdotNET)
 				{
 					Utility.Separate(sb, "-vb", " ");
-				}
+                }
+
+                #region Lokai Versioning
+                if (Core.LV1)
+                    Utility.Separate(sb, "-lv1", " ");
+
+                if (Core.LV2)
+                    Utility.Separate(sb, "-lv2", " ");
+
+                if (Core.LV3)
+                    Utility.Separate(sb, "-lv3", " ");
+
+                if (Core.LV4)
+                    Utility.Separate(sb, "-lv4", " ");
+
+                if (Core.LV5)
+                    Utility.Separate(sb, "-lv5", " ");
+                #endregion
 
 				return sb.ToString();
 			}

@@ -228,7 +228,7 @@ namespace Server
 #else
 				parms.CompilerOptions = String.Format( "{0} /nowarn:169,219,414 /recurse:Scripts/*.cs", parms.CompilerOptions );
 				CompilerResults results = provider.CompileAssemblyFromFile( parms, "" );
-                #endif
+#endif
 				m_AdditionalReferences.Add(path);
 
 				Display(results);
@@ -248,7 +248,7 @@ namespace Server
 						}
 					}
 				}
-                #endif
+#endif
 
 				if (cache && Path.GetFileName(path) == "Scripts.CS.dll")
 				{
@@ -273,7 +273,772 @@ namespace Server
 				assembly = results.CompiledAssembly;
 				return true;
 			}
-		}
+        }
+
+        #region Lokai Version 1
+
+        public static bool CompileLV1Scripts(out Assembly assembly)
+        {
+            return CompileLV1Scripts(false, true, out assembly);
+        }
+
+        public static bool CompileLV1Scripts(bool debug, out Assembly assembly)
+        {
+            return CompileLV1Scripts(debug, true, out assembly);
+        }
+
+        public static bool CompileLV1Scripts(bool debug, bool cache, out Assembly assembly)
+        {
+            Utility.PushColor(ConsoleColor.Green);
+            Console.Write("Scripts: Compiling Lokai Version-1 C# scripts...");
+            Utility.PopColor();
+            var files = GetScripts("*.cs", "Scripts.LV1");
+
+            if (files.Length == 0)
+            {
+                Utility.PushColor(ConsoleColor.Red);
+                Console.WriteLine("no files found.");
+                Utility.PopColor();
+                assembly = null;
+                return true;
+            }
+
+            if (File.Exists("Scripts/Output/Scripts.LV1.dll"))
+            {
+                if (cache && File.Exists("Scripts/Output/Scripts.LV1.hash"))
+                {
+                    try
+                    {
+                        var hashCode = GetHashCode("Scripts/Output/Scripts.LV1.dll", files, debug);
+
+                        using (
+                            FileStream fs = new FileStream("Scripts/Output/Scripts.LV1.hash", FileMode.Open, FileAccess.Read, FileShare.Read))
+                        {
+                            using (BinaryReader bin = new BinaryReader(fs))
+                            {
+                                var bytes = bin.ReadBytes(hashCode.Length);
+
+                                if (bytes.Length == hashCode.Length)
+                                {
+                                    bool valid = true;
+
+                                    for (int i = 0; i < bytes.Length; ++i)
+                                    {
+                                        if (bytes[i] != hashCode[i])
+                                        {
+                                            valid = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if (valid)
+                                    {
+                                        assembly = Assembly.LoadFrom("Scripts/Output/Scripts.LV1.dll");
+
+                                        if (!m_AdditionalReferences.Contains(assembly.Location))
+                                        {
+                                            m_AdditionalReferences.Add(assembly.Location);
+                                        }
+
+                                        Utility.PushColor(ConsoleColor.Green);
+                                        Console.WriteLine("done (cached)");
+                                        Utility.PopColor();
+
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    { }
+                }
+            }
+
+            DeleteFiles("Scripts.LV1*.dll");
+
+            using (CSharpCodeProvider provider = new CSharpCodeProvider())
+            {
+                string path = GetUnusedPath("Scripts.LV1");
+
+                CompilerParameters parms = new CompilerParameters(GetReferenceAssemblies(), path, debug);
+
+                string options = GetCompilerOptions(debug);
+
+                if (options != null)
+                {
+                    parms.CompilerOptions = options;
+                }
+
+                if (Core.HaltOnWarning)
+                {
+                    parms.WarningLevel = 4;
+                }
+
+#if !MONO
+                CompilerResults results = provider.CompileAssemblyFromFile(parms, files);
+#else
+				parms.CompilerOptions = String.Format( "{0} /nowarn:169,219,414 /recurse:Scripts.LV1/*.cs", parms.CompilerOptions );
+				CompilerResults results = provider.CompileAssemblyFromFile( parms, "" );
+#endif
+                m_AdditionalReferences.Add(path);
+
+                Display(results);
+
+#if !MONO
+                if (results.Errors.Count > 0)
+                {
+                    assembly = null;
+                    return false;
+                }
+#else
+				if( results.Errors.Count > 0 ) {
+					foreach( CompilerError err in results.Errors ) {
+						if ( !err.IsWarning ) {
+							assembly = null;
+							return false;
+						}
+					}
+				}
+#endif
+
+                if (cache && Path.GetFileName(path) == "Scripts.LV1.dll")
+                {
+                    try
+                    {
+                        var hashCode = GetHashCode(path, files, debug);
+
+                        using (
+                            FileStream fs = new FileStream(
+                                "Scripts/Output/Scripts.LV1.hash", FileMode.Create, FileAccess.Write, FileShare.None))
+                        {
+                            using (BinaryWriter bin = new BinaryWriter(fs))
+                            {
+                                bin.Write(hashCode, 0, hashCode.Length);
+                            }
+                        }
+                    }
+                    catch
+                    { }
+                }
+
+                assembly = results.CompiledAssembly;
+                return true;
+            }
+        }
+        #endregion
+
+        #region Lokai Version 2
+
+        public static bool CompileLV2Scripts(out Assembly assembly)
+        {
+            return CompileLV2Scripts(false, true, out assembly);
+        }
+
+        public static bool CompileLV2Scripts(bool debug, out Assembly assembly)
+        {
+            return CompileLV2Scripts(debug, true, out assembly);
+        }
+
+        public static bool CompileLV2Scripts(bool debug, bool cache, out Assembly assembly)
+        {
+            Utility.PushColor(ConsoleColor.Green);
+            Console.Write("Scripts: Compiling Lokai Version-2 C# scripts...");
+            Utility.PopColor();
+            var files = GetScripts("*.cs", "Scripts.LV2");
+
+            if (files.Length == 0)
+            {
+                Utility.PushColor(ConsoleColor.Red);
+                Console.WriteLine("no files found.");
+                Utility.PopColor();
+                assembly = null;
+                return true;
+            }
+
+            if (File.Exists("Scripts/Output/Scripts.LV2.dll"))
+            {
+                if (cache && File.Exists("Scripts/Output/Scripts.LV2.hash"))
+                {
+                    try
+                    {
+                        var hashCode = GetHashCode("Scripts/Output/Scripts.LV2.dll", files, debug);
+
+                        using (
+                            FileStream fs = new FileStream("Scripts/Output/Scripts.LV2.hash", FileMode.Open, FileAccess.Read, FileShare.Read))
+                        {
+                            using (BinaryReader bin = new BinaryReader(fs))
+                            {
+                                var bytes = bin.ReadBytes(hashCode.Length);
+
+                                if (bytes.Length == hashCode.Length)
+                                {
+                                    bool valid = true;
+
+                                    for (int i = 0; i < bytes.Length; ++i)
+                                    {
+                                        if (bytes[i] != hashCode[i])
+                                        {
+                                            valid = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if (valid)
+                                    {
+                                        assembly = Assembly.LoadFrom("Scripts/Output/Scripts.LV2.dll");
+
+                                        if (!m_AdditionalReferences.Contains(assembly.Location))
+                                        {
+                                            m_AdditionalReferences.Add(assembly.Location);
+                                        }
+
+                                        Utility.PushColor(ConsoleColor.Green);
+                                        Console.WriteLine("done (cached)");
+                                        Utility.PopColor();
+
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    { }
+                }
+            }
+
+            DeleteFiles("Scripts.LV2*.dll");
+
+            using (CSharpCodeProvider provider = new CSharpCodeProvider())
+            {
+                string path = GetUnusedPath("Scripts.LV2");
+
+                CompilerParameters parms = new CompilerParameters(GetReferenceAssemblies(), path, debug);
+
+                string options = GetCompilerOptions(debug);
+
+                if (options != null)
+                {
+                    parms.CompilerOptions = options;
+                }
+
+                if (Core.HaltOnWarning)
+                {
+                    parms.WarningLevel = 4;
+                }
+
+#if !MONO
+                CompilerResults results = provider.CompileAssemblyFromFile(parms, files);
+#else
+				parms.CompilerOptions = String.Format( "{0} /nowarn:169,219,414 /recurse:Scripts.LV2/*.cs", parms.CompilerOptions );
+				CompilerResults results = provider.CompileAssemblyFromFile( parms, "" );
+#endif
+                m_AdditionalReferences.Add(path);
+
+                Display(results);
+
+#if !MONO
+                if (results.Errors.Count > 0)
+                {
+                    assembly = null;
+                    return false;
+                }
+#else
+				if( results.Errors.Count > 0 ) {
+					foreach( CompilerError err in results.Errors ) {
+						if ( !err.IsWarning ) {
+							assembly = null;
+							return false;
+						}
+					}
+				}
+#endif
+
+                if (cache && Path.GetFileName(path) == "Scripts.LV2.dll")
+                {
+                    try
+                    {
+                        var hashCode = GetHashCode(path, files, debug);
+
+                        using (
+                            FileStream fs = new FileStream(
+                                "Scripts/Output/Scripts.LV2.hash", FileMode.Create, FileAccess.Write, FileShare.None))
+                        {
+                            using (BinaryWriter bin = new BinaryWriter(fs))
+                            {
+                                bin.Write(hashCode, 0, hashCode.Length);
+                            }
+                        }
+                    }
+                    catch
+                    { }
+                }
+
+                assembly = results.CompiledAssembly;
+                return true;
+            }
+        }
+        #endregion
+
+        #region Lokai Version 3
+
+        public static bool CompileLV3Scripts(out Assembly assembly)
+        {
+            return CompileLV3Scripts(false, true, out assembly);
+        }
+
+        public static bool CompileLV3Scripts(bool debug, out Assembly assembly)
+        {
+            return CompileLV3Scripts(debug, true, out assembly);
+        }
+
+        public static bool CompileLV3Scripts(bool debug, bool cache, out Assembly assembly)
+        {
+            Utility.PushColor(ConsoleColor.Green);
+            Console.Write("Scripts: Compiling Lokai Version-3 C# scripts...");
+            Utility.PopColor();
+            var files = GetScripts("*.cs", "Scripts.LV3");
+
+            if (files.Length == 0)
+            {
+                Utility.PushColor(ConsoleColor.Red);
+                Console.WriteLine("no files found.");
+                Utility.PopColor();
+                assembly = null;
+                return true;
+            }
+
+            if (File.Exists("Scripts/Output/Scripts.LV3.dll"))
+            {
+                if (cache && File.Exists("Scripts/Output/Scripts.LV3.hash"))
+                {
+                    try
+                    {
+                        var hashCode = GetHashCode("Scripts/Output/Scripts.LV3.dll", files, debug);
+
+                        using (
+                            FileStream fs = new FileStream("Scripts/Output/Scripts.LV3.hash", FileMode.Open, FileAccess.Read, FileShare.Read))
+                        {
+                            using (BinaryReader bin = new BinaryReader(fs))
+                            {
+                                var bytes = bin.ReadBytes(hashCode.Length);
+
+                                if (bytes.Length == hashCode.Length)
+                                {
+                                    bool valid = true;
+
+                                    for (int i = 0; i < bytes.Length; ++i)
+                                    {
+                                        if (bytes[i] != hashCode[i])
+                                        {
+                                            valid = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if (valid)
+                                    {
+                                        assembly = Assembly.LoadFrom("Scripts/Output/Scripts.LV3.dll");
+
+                                        if (!m_AdditionalReferences.Contains(assembly.Location))
+                                        {
+                                            m_AdditionalReferences.Add(assembly.Location);
+                                        }
+
+                                        Utility.PushColor(ConsoleColor.Green);
+                                        Console.WriteLine("done (cached)");
+                                        Utility.PopColor();
+
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    { }
+                }
+            }
+
+            DeleteFiles("Scripts.LV3*.dll");
+
+            using (CSharpCodeProvider provider = new CSharpCodeProvider())
+            {
+                string path = GetUnusedPath("Scripts.LV3");
+
+                CompilerParameters parms = new CompilerParameters(GetReferenceAssemblies(), path, debug);
+
+                string options = GetCompilerOptions(debug);
+
+                if (options != null)
+                {
+                    parms.CompilerOptions = options;
+                }
+
+                if (Core.HaltOnWarning)
+                {
+                    parms.WarningLevel = 4;
+                }
+
+#if !MONO
+                CompilerResults results = provider.CompileAssemblyFromFile(parms, files);
+#else
+				parms.CompilerOptions = String.Format( "{0} /nowarn:169,219,414 /recurse:Scripts.LV3/*.cs", parms.CompilerOptions );
+				CompilerResults results = provider.CompileAssemblyFromFile( parms, "" );
+#endif
+                m_AdditionalReferences.Add(path);
+
+                Display(results);
+
+#if !MONO
+                if (results.Errors.Count > 0)
+                {
+                    assembly = null;
+                    return false;
+                }
+#else
+				if( results.Errors.Count > 0 ) {
+					foreach( CompilerError err in results.Errors ) {
+						if ( !err.IsWarning ) {
+							assembly = null;
+							return false;
+						}
+					}
+				}
+#endif
+
+                if (cache && Path.GetFileName(path) == "Scripts.LV3.dll")
+                {
+                    try
+                    {
+                        var hashCode = GetHashCode(path, files, debug);
+
+                        using (
+                            FileStream fs = new FileStream(
+                                "Scripts/Output/Scripts.LV3.hash", FileMode.Create, FileAccess.Write, FileShare.None))
+                        {
+                            using (BinaryWriter bin = new BinaryWriter(fs))
+                            {
+                                bin.Write(hashCode, 0, hashCode.Length);
+                            }
+                        }
+                    }
+                    catch
+                    { }
+                }
+
+                assembly = results.CompiledAssembly;
+                return true;
+            }
+        }
+        #endregion
+
+        #region Lokai Version 4
+
+        public static bool CompileLV4Scripts(out Assembly assembly)
+        {
+            return CompileLV4Scripts(false, true, out assembly);
+        }
+
+        public static bool CompileLV4Scripts(bool debug, out Assembly assembly)
+        {
+            return CompileLV4Scripts(debug, true, out assembly);
+        }
+
+        public static bool CompileLV4Scripts(bool debug, bool cache, out Assembly assembly)
+        {
+            Utility.PushColor(ConsoleColor.Green);
+            Console.Write("Scripts: Compiling Lokai Version-4 C# scripts...");
+            Utility.PopColor();
+            var files = GetScripts("*.cs", "Scripts.LV4");
+
+            if (files.Length == 0)
+            {
+                Utility.PushColor(ConsoleColor.Red);
+                Console.WriteLine("no files found.");
+                Utility.PopColor();
+                assembly = null;
+                return true;
+            }
+
+            if (File.Exists("Scripts/Output/Scripts.LV4.dll"))
+            {
+                if (cache && File.Exists("Scripts/Output/Scripts.LV4.hash"))
+                {
+                    try
+                    {
+                        var hashCode = GetHashCode("Scripts/Output/Scripts.LV4.dll", files, debug);
+
+                        using (
+                            FileStream fs = new FileStream("Scripts/Output/Scripts.LV4.hash", FileMode.Open, FileAccess.Read, FileShare.Read))
+                        {
+                            using (BinaryReader bin = new BinaryReader(fs))
+                            {
+                                var bytes = bin.ReadBytes(hashCode.Length);
+
+                                if (bytes.Length == hashCode.Length)
+                                {
+                                    bool valid = true;
+
+                                    for (int i = 0; i < bytes.Length; ++i)
+                                    {
+                                        if (bytes[i] != hashCode[i])
+                                        {
+                                            valid = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if (valid)
+                                    {
+                                        assembly = Assembly.LoadFrom("Scripts/Output/Scripts.LV4.dll");
+
+                                        if (!m_AdditionalReferences.Contains(assembly.Location))
+                                        {
+                                            m_AdditionalReferences.Add(assembly.Location);
+                                        }
+
+                                        Utility.PushColor(ConsoleColor.Green);
+                                        Console.WriteLine("done (cached)");
+                                        Utility.PopColor();
+
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    { }
+                }
+            }
+
+            DeleteFiles("Scripts.LV4*.dll");
+
+            using (CSharpCodeProvider provider = new CSharpCodeProvider())
+            {
+                string path = GetUnusedPath("Scripts.LV4");
+
+                CompilerParameters parms = new CompilerParameters(GetReferenceAssemblies(), path, debug);
+
+                string options = GetCompilerOptions(debug);
+
+                if (options != null)
+                {
+                    parms.CompilerOptions = options;
+                }
+
+                if (Core.HaltOnWarning)
+                {
+                    parms.WarningLevel = 4;
+                }
+
+#if !MONO
+                CompilerResults results = provider.CompileAssemblyFromFile(parms, files);
+#else
+				parms.CompilerOptions = String.Format( "{0} /nowarn:169,219,414 /recurse:Scripts.LV4/*.cs", parms.CompilerOptions );
+				CompilerResults results = provider.CompileAssemblyFromFile( parms, "" );
+#endif
+                m_AdditionalReferences.Add(path);
+
+                Display(results);
+
+#if !MONO
+                if (results.Errors.Count > 0)
+                {
+                    assembly = null;
+                    return false;
+                }
+#else
+				if( results.Errors.Count > 0 ) {
+					foreach( CompilerError err in results.Errors ) {
+						if ( !err.IsWarning ) {
+							assembly = null;
+							return false;
+						}
+					}
+				}
+#endif
+
+                if (cache && Path.GetFileName(path) == "Scripts.LV4.dll")
+                {
+                    try
+                    {
+                        var hashCode = GetHashCode(path, files, debug);
+
+                        using (
+                            FileStream fs = new FileStream(
+                                "Scripts/Output/Scripts.LV4.hash", FileMode.Create, FileAccess.Write, FileShare.None))
+                        {
+                            using (BinaryWriter bin = new BinaryWriter(fs))
+                            {
+                                bin.Write(hashCode, 0, hashCode.Length);
+                            }
+                        }
+                    }
+                    catch
+                    { }
+                }
+
+                assembly = results.CompiledAssembly;
+                return true;
+            }
+        }
+        #endregion
+
+        #region Lokai Version 5
+
+        public static bool CompileLV5Scripts(out Assembly assembly)
+        {
+            return CompileLV5Scripts(false, true, out assembly);
+        }
+
+        public static bool CompileLV5Scripts(bool debug, out Assembly assembly)
+        {
+            return CompileLV5Scripts(debug, true, out assembly);
+        }
+
+        public static bool CompileLV5Scripts(bool debug, bool cache, out Assembly assembly)
+        {
+            Utility.PushColor(ConsoleColor.Green);
+            Console.Write("Scripts: Compiling Lokai Version-5 C# scripts...");
+            Utility.PopColor();
+            var files = GetScripts("*.cs", "Scripts.LV5");
+
+            if (files.Length == 0)
+            {
+                Utility.PushColor(ConsoleColor.Red);
+                Console.WriteLine("no files found.");
+                Utility.PopColor();
+                assembly = null;
+                return true;
+            }
+
+            if (File.Exists("Scripts/Output/Scripts.LV5.dll"))
+            {
+                if (cache && File.Exists("Scripts/Output/Scripts.LV5.hash"))
+                {
+                    try
+                    {
+                        var hashCode = GetHashCode("Scripts/Output/Scripts.LV5.dll", files, debug);
+
+                        using (
+                            FileStream fs = new FileStream("Scripts/Output/Scripts.LV5.hash", FileMode.Open, FileAccess.Read, FileShare.Read))
+                        {
+                            using (BinaryReader bin = new BinaryReader(fs))
+                            {
+                                var bytes = bin.ReadBytes(hashCode.Length);
+
+                                if (bytes.Length == hashCode.Length)
+                                {
+                                    bool valid = true;
+
+                                    for (int i = 0; i < bytes.Length; ++i)
+                                    {
+                                        if (bytes[i] != hashCode[i])
+                                        {
+                                            valid = false;
+                                            break;
+                                        }
+                                    }
+
+                                    if (valid)
+                                    {
+                                        assembly = Assembly.LoadFrom("Scripts/Output/Scripts.LV5.dll");
+
+                                        if (!m_AdditionalReferences.Contains(assembly.Location))
+                                        {
+                                            m_AdditionalReferences.Add(assembly.Location);
+                                        }
+
+                                        Utility.PushColor(ConsoleColor.Green);
+                                        Console.WriteLine("done (cached)");
+                                        Utility.PopColor();
+
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    { }
+                }
+            }
+
+            DeleteFiles("Scripts.LV5*.dll");
+
+            using (CSharpCodeProvider provider = new CSharpCodeProvider())
+            {
+                string path = GetUnusedPath("Scripts.LV5");
+
+                CompilerParameters parms = new CompilerParameters(GetReferenceAssemblies(), path, debug);
+
+                string options = GetCompilerOptions(debug);
+
+                if (options != null)
+                {
+                    parms.CompilerOptions = options;
+                }
+
+                if (Core.HaltOnWarning)
+                {
+                    parms.WarningLevel = 4;
+                }
+
+#if !MONO
+                CompilerResults results = provider.CompileAssemblyFromFile(parms, files);
+#else
+				parms.CompilerOptions = String.Format( "{0} /nowarn:169,219,414 /recurse:Scripts.LV5/*.cs", parms.CompilerOptions );
+				CompilerResults results = provider.CompileAssemblyFromFile( parms, "" );
+#endif
+                m_AdditionalReferences.Add(path);
+
+                Display(results);
+
+#if !MONO
+                if (results.Errors.Count > 0)
+                {
+                    assembly = null;
+                    return false;
+                }
+#else
+				if( results.Errors.Count > 0 ) {
+					foreach( CompilerError err in results.Errors ) {
+						if ( !err.IsWarning ) {
+							assembly = null;
+							return false;
+						}
+					}
+				}
+#endif
+
+                if (cache && Path.GetFileName(path) == "Scripts.LV5.dll")
+                {
+                    try
+                    {
+                        var hashCode = GetHashCode(path, files, debug);
+
+                        using (
+                            FileStream fs = new FileStream(
+                                "Scripts/Output/Scripts.LV5.hash", FileMode.Create, FileAccess.Write, FileShare.None))
+                        {
+                            using (BinaryWriter bin = new BinaryWriter(fs))
+                            {
+                                bin.Write(hashCode, 0, hashCode.Length);
+                            }
+                        }
+                    }
+                    catch
+                    { }
+                }
+
+                assembly = results.CompiledAssembly;
+                return true;
+            }
+        }
+        #endregion
 
 		public static bool CompileVBScripts(out Assembly assembly)
 		{
@@ -605,7 +1370,122 @@ namespace Server
 				Utility.PushColor(ConsoleColor.DarkRed);
 				Console.WriteLine("Scripts: Skipping VB.NET Scripts...done (use -vb to enable)");
 				Utility.PopColor();
-			}
+            }
+
+            #region Lokai Version 1
+            if (Core.LV1)
+            {
+                if (CompileLV1Scripts(debug, cache, out assembly))
+                {
+                    if (assembly != null)
+                    {
+                        assemblies.Add(assembly);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Utility.PushColor(ConsoleColor.DarkGray);
+                Console.WriteLine("Scripts: Skipping Lokai V1 Scripts...done (use -lv1 to enable)");
+                Utility.PopColor();
+            }
+            #endregion
+
+            #region Lokai Version 2
+            if (Core.LV2)
+            {
+                if (CompileLV2Scripts(debug, cache, out assembly))
+                {
+                    if (assembly != null)
+                    {
+                        assemblies.Add(assembly);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Utility.PushColor(ConsoleColor.DarkGray);
+                Console.WriteLine("Scripts: Skipping Lokai V2 Scripts...done (use -lv2 to enable)");
+                Utility.PopColor();
+            }
+            #endregion
+
+            #region Lokai Version 3
+            if (Core.LV3)
+            {
+                if (CompileLV3Scripts(debug, cache, out assembly))
+                {
+                    if (assembly != null)
+                    {
+                        assemblies.Add(assembly);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Utility.PushColor(ConsoleColor.DarkGray);
+                Console.WriteLine("Scripts: Skipping Lokai V3 Scripts...done (use -lv3 to enable)");
+                Utility.PopColor();
+            }
+            #endregion
+
+            #region Lokai Version 4
+            if (Core.LV4)
+            {
+                if (CompileLV4Scripts(debug, cache, out assembly))
+                {
+                    if (assembly != null)
+                    {
+                        assemblies.Add(assembly);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Utility.PushColor(ConsoleColor.DarkGray);
+                Console.WriteLine("Scripts: Skipping Lokai V4 Scripts...done (use -lv4 to enable)");
+                Utility.PopColor();
+            }
+            #endregion
+
+            #region Lokai Version 5
+            if (Core.LV5)
+            {
+                if (CompileLV5Scripts(debug, cache, out assembly))
+                {
+                    if (assembly != null)
+                    {
+                        assemblies.Add(assembly);
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                Utility.PushColor(ConsoleColor.DarkGray);
+                Console.WriteLine("Scripts: Skipping Lokai V5 Scripts...done (use -lv5 to enable)");
+                Utility.PopColor();
+            }
+            #endregion
 
 			if (assemblies.Count == 0)
 			{
@@ -742,6 +1622,17 @@ namespace Server
 				Directory.CreateDirectory(path);
 			}
 		}
+
+        #region Lokai Versioning V1.1		// additional GetScript overload to get list of scripts in specific path
+        public static string[] GetScripts(string filter, string path)
+        {
+            List<string> list = new List<string>();
+
+            GetScripts(list, Path.Combine(Core.BaseDirectory, path), filter);
+
+            return list.ToArray();
+        }
+        #endregion
 
 		public static string[] GetScripts(string filter)
 		{
