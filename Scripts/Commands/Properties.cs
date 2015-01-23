@@ -709,6 +709,7 @@ namespace Server.Commands
 
 namespace Server
 {
+    [Serializable]
 	public abstract class PropertyException : ApplicationException
 	{
 		public Property Property { get; protected set; }

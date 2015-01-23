@@ -1384,6 +1384,7 @@
     <Compile Include=".\Items\Shields\- Misc\MysticsGuard.cs" />
     <Compile Include=".\Items\Shields\- Misc\PillarOfStrength.cs" />
     <Compile Include=".\Items\Shields\- Misc\SentinelsGuard.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Items\Addons\Magincia Bazaar\Bazaar AddOns\Alchemist2BazaarAddon.cs" />
     <Compile Include="Items\Addons\Magincia Bazaar\Bazaar AddOns\ArmorBazaarAddon.cs" />
     <Compile Include="Items\Addons\Magincia Bazaar\Bazaar AddOns\ArtistBazaarAddon.cs" />
