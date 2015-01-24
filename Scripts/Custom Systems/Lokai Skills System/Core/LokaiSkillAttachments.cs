@@ -76,7 +76,7 @@ namespace Server.Engines.XmlSpawner2
             // version 0
             writer.Write((Mobile)m_From);
             m_Skills.Serialize(writer);
-
+            if (Core.Debug) Console.WriteLine("Serialized LSA for {0}.", m_From.Name);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -86,6 +86,7 @@ namespace Server.Engines.XmlSpawner2
             int version = reader.ReadInt();
             // version 0
             m_From = reader.ReadMobile();
+            if (Core.Debug) Console.WriteLine("Deserializing LSA for {0}.", m_From.Name);
             m_Skills = new LokaiSkills(m_From, reader);
         }
     }
