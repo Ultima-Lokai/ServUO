@@ -1,6 +1,8 @@
 using System;
 using Server.Factions;
 using Server.Mobiles;
+using Server.UOC;
+using Server.Engines.XmlSpawner2;
 
 namespace Server.Misc
 {
@@ -262,7 +264,13 @@ namespace Server.Misc
 
                 if (!from.Player || (skills.Total + toGain) <= skills.Cap)
                 {
+                    double oldBase = skill.Base;
                     skill.BaseFixedPoint += toGain;
+                    CitizenAttachment ca = (CitizenAttachment)XmlAttach.FindAttachment(from, typeof(CitizenAttachment));
+                    if (ca != null)
+                    {
+                        ca.OnSkillChange(skill.SkillName, oldBase);
+                    }
                 }
             }
 

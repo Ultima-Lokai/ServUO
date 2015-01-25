@@ -1,0 +1,557 @@
+/*
+ * Buildings			Requires   			Cost		Effects
+Palace				At least 4 cities	160			Makes this city the Capital
+					Can only have one				Reduces maintenance in nearby cities
+													+2 culture
+													+1 happiness
+													+8 commerce
+Walls				Masonry				50			+50% Defense (Except vs. gunpowder-based units)
+													Required to build castle
+													Double production speed with stone
+Castle				Engineering			100			+50% Defense (Except vs. gunpowder-based units)
+					Walls							+1 culture
+													Double production speed with stone
+Barracks			-					60			New land units receive +4 experience points
+													Required to build Heroic Epic
+Bunker				Electricity			100			-75% damage from air units
+Bomb Shelters		Electricity			100			-75% damage from nukes
+					Manhattan Project				
+Granary				Pottery				60			Stores 50% of food after growth
+													+1 health from Corn, Rice, Wheat
+													Available for free on Renaissance and later starts
+Aqueduct			Mathematics			100			+2 health
+					Masonry							Required to build The Hanging Gardens
+													Available for free on Industrial and later starts
+Hospital			Medicine			200			+3 health
+													Heals units extra 10% damage / turn
+													Required to build Red Cross
+Recycling Center	Ecology				300			No unhealthiness from buildings
+Lighthouse			Sailing				60			Water tiles +1 food
+													Required to build The Great Lighthouse
+													Available for free on Industrial and later starts
+Harbor				Compass				80			+50% trade route yield
+													+1 health from Crab, Clams and Fish resources
+													Available for free on Modern and later starts
+Drydock				Steel				120			New water units receive +4 experience
+													Build water units 50% faster
+													+1 unhealthiness
+Airport				Flight				250			Can airlift 1 land unit per turn
+													+1 trade route
+													+1 unhealthiness
+Forge				Metal Casting		120			+25% hammer production
+													Can turn 1 citizen into engineer
+													+1 happiness from Gems, Gold, Silver
+													+1 unhealthiness
+													Required to build Ironworks, The Colossus, The Eiffel Tower, The Statue of Liberty
+													Available for free on Modern and later starts
+Factory				Assembly Line		250			+25% hammer production
+													+50% hammer production with power
+													Can turn 2 citizens into engineer
+													+1 unhealthiness
+													Required to build Coal Plant, Hydro Plant, Nuclear Plant
+Coal Plant			Assembly Line		150			Provides power
+					Factory							+2 unhealthiness if used
+Hydro Plant			Plastics			200			Provides power
+					Factory				
+Nuclear Plant		Fission				250			Provides power with Uranium
+					Factory							Small chance of nuclear meltdown
+Obelisk				Mysticism			30			+1 culture
+													Obsolete with Calendar
+Academy				Great Scientist		-			+50% science in city
+													+4 culture
+Library				Writing				90			+25% science in city
+													+2 culture
+													Can turn 2 citizens into scientist
+													Required to build University, National Epic, Great Library
+University			Education			200			+25% science in city
+					Library							+3 culture
+													Required to build Oxford University
+Observatory			Astronomy			150			+25% science in city
+													Can turn 1 citizen into scientist
+													Required to build Laboratory
+Laboratory			Computers			250			+25% science in city
+					Observatory						+50% spaceship production
+													Can turn 1 citizen into scientist
+													+1 unhealthiness
+Theatre				Drama				50			+1 happiness per 10% culture rate
+													Can turn two citizens into artist
+													+1 happiness from Dye
+													+3 culture
+													Required to build Globe Theatre
+Colosseum			Construction		120			+1 happiness
+													+1 happiness per 20% culture rate
+Broadcast Tower		Mass Media			175			+50% culture
+													+1 happiness per 10% culture rate
+													Can turn 2 citizens into artist
+													+1 happiness from Hit Singles, Hit Musicals, Hit Movies
+Market				Currency			150			+25% gold in city
+													Can turn 2 citizens into merchant
+													+1 happiness from Fur, Ivory, Silk, Whale
+													Available for free on Industrial and later starts
+Grocer				Currency			150			+25% gold in city
+					Guilds							Can turn 2 citizens into merchant
+													+1 health from Banana, Spicer, Sugar, Wine
+													Required to build Supermarket
+													Available for free on Industrial and later starts
+Bank				Banking				200			+50% gold in city
+													Required to build Wall Street
+													Available for free on Modern and later starts
+Supermarket			Refrigeration		150			+1 health from Cow, Pig, Deer, Sheep
+					Grocer				
+Courthouse			Code of Laws		120			-50% maintenance
+													Required to build Forbidden Palace
+Jail				Constitution		120			-25% war weariness
+													Available for free on Modern and later starts
+
+Wonder				Requires			Cost		Effects
+The Pyramids		Masonry				450			Enables all Government civics
+													+6 culture
+													+2 engineer Great People Points
+													Can only be built on Classical and earlier starts
+													Double production speed with Stone
+Stonehenge			Mysticism			120			Free Obelisk in every city
+													Centers world map
+													+8 culture
+													+2 prophet Great People Points
+													Can only be built on Classical and earlier starts
+													Double production speed with Stone
+													Obsolete wth Calendar
+The Great Library	Literature			350			+2 free Scientist in city
+					Library							+8 Culture
+													+2 scientist Great People Points
+													Can only be built on Medieval and earlier starts
+													Double production speed with Marble
+													Obsolete with Scientific Method
+Great Lighthouse	Masonry				200			+2 trade routes in all coastal cities
+					Lighthouse						+6 culture
+													+2 merchant Great People Points
+													Can only be built on Classical and earlier starts
+													Obsolete wth Corporation
+The Hanging Gardens	Mathematics			300			+1 health in all cities
+					Aquaduct						+1 population in all cities
+													+6 culture
+													+2 engineer Great People Points
+													Can only be built on Medieval and earlier starts
+													Double production speed with Stone
+The Colossus		Metal Casting		250			+1 commerce for water tiles in all cities
+					Forge							+6 culture
+													+2 merchant Great People Points
+													Can only be built on Medieval and earlier starts
+													Double production speed with Copper
+													Obsolete with Astronomy
+The Oracle			Priesthood			150			+1 free technology
+													+8 culture
+													+2 prophet Great People Points
+													Can only be built on Classical and earlier starts
+													Double production speed with Marble
+The Parthenon		Polytheism			400			+50% great people birth rate in all cities
+													+10 culture
+													+2 artist Great People Points
+													Can only be built on Classical and earlier starts
+													Double production speed with Marble
+													Obsolete with Chemistry
+Angkor Wat			Philosophy			500			+1 hammer from Priest in all cities
+													Can turn 3 citizens into priest
+													+8 culture
+													+2 priest Great People Points
+													Can only be built on Renaissance and earlier starts
+													Double production speed with Stone
+													Obsolete with Computers
+The Spiral Minaret	Divine Right		550			+1 gold from all state religion buildings
+													+8 culture
+													+2 prophet Great People Points
+													Can only be built on Renaissance and earlier starts
+													Double production speed with Stone
+													Obsolete with Computer
+The Hagia Sophia	Engineering			550			Workers build improvements 50% faster
+													+8 culture
+													+2 engineer Great People Points
+													Can only be built on Medieval and earlier starts
+													Double production speed with Marble
+													Obsolete with Steam Power
+Chichen Itza		Code of Laws		500			+25% defence in all cities
+													+6 culture
+													+2 prophet Great People Points
+													Can only be built on Medieval and earlier starts
+													Double production speed with Stone
+													Obsolete with Rifling
+The Sistine Chapel	Theology			600			+2 Culture per Specialist in All Cities
+													+10 Culture
+													+2 artist Great People Points
+													Can only be built on Renaissance and earlier starts
+													Double production speed with Marble
+Notre Dame			Music				650			+1 happiness in all cities on this continent
+													+10 culture
+													+2 artist Great People Points
+													Can only be built on Renaissance and earlier starts
+													Double production speed with Stone
+The Taj Mahal		Nationalism			700			Starts a golden age
+													+10 culture
+													+2 artist Great People Points
+													Can only be built on Industrial and earlier starts
+													Double production speed with Marble
+The Kremlin			Communism			800			-33% hurry production cost
+													+2 artist Great People Points
+													Double production speed with Stone
+													Obsolete with Fiber Obtics
+The Eiffel Tower	Radio				1250		Free Broadcast Tower in every city
+					Forge							+6 culture
+													+2 merchant Great People Points
+													Double production speed with Iron
+Statue of Liberty	Democracy			1500		+1 free specialist in all cities on the continent
+					Forge							+6 culture
+													+2 merchant Great People Points
+													Can only be built on Industrial and earlier starts
+													Double production speed with Copper
+Broadway			Electricity			800			+50% culture
+													Provides 5 Hit Musicals
+													+2 artist Great People Points
+Rock & Roll			Radio				800			+50% culture
+													Provies 5 Hit Singles
+													+2 artist Great People Points
+Hollywood			Mass Media			1000		+50% culture
+													Provides 5 Hit Movies
+													+2 artist Great People Points
+Three Gorges Dam	Plastics			1750		Provides power for all cities on the continent
+													+2 engineer Great People Points
+The Pentagon		Assembly Line		1250		+2 experience for new units in all cities
+													+2 engineer Great People Points
+The United Nations	Mass Media			1000		Triggers Global Elections
+													Guarantees Eligibility for Diplomatic Votes
+													+2 merchant Great People Points
+													Diplomatic victory must be enabled
+													Requires at least three teams
+The Space Elevator	Robotics			2000		+50% space ship production in all cities
+													+2 scientist Great People Points
+													Double production speed with Aluminum
+													Can be build at a maximum latitude of 30 degrees
+													Space Race victory must be enabled
+Versailles			Divine Right		800			Reduces Maintenance in nearby cities
+													+10 culture
+													+2 merchant Great People Points
+													Can only be built on Industrial and earlier starts
+													Double production speed with Marble
+
+
+Palace				4 cities			160			Makes this city the Capital
+													Reduces maintenance in nearby cities
+													+2 culture
+													+1 happiness
+													+8 commerce
+Forbidden Palace	8 cities			200			Reduces maintenance in nearby cities
+													+4 culture
+													+1 merchant Great People Point
+Heroic Epic			Literature			200			+100% military unit production in this city
+					Barracks						+4 culture
+					Level 4 unit					+1 artist Great People Point
+													Can only be built on Renaissance and earlier starts
+													Double production speed with Marble
+National Epic		Literature			250			+100% great people points in this city
+					Library							+4 culture
+													+1 artist Great People Point
+													Can only be built on Renaissance and earlier starts
+													Double production speed with Marble
+Globe Theatre		Drama				300			No unhappiness in this city
+													+6 culture
+													+1 artist Great People Point
+													Can turn 3 citizens into artist
+Oxford University	Education			400			+100% science in this city
+													+4 Culture
+													+1 scientist Great People Point
+													Can turn 3 citizens into scientist
+													Double production speed with Stone
+Wall Street			Corporation			600			+100% gold in this city
+													+1 merchant Great People Point
+													Can turn 3 citizens into merchant
+Iron Works			Steel				700			+50% production in this city with coal
+													+50% production in this city with iron
+													+2 unhealthiness
+													+1 engineer Great People Point
+													Can turn 3 citizens into engineer
+Hermitage			Nationalism			300			+100% culture in this city
+													+1 artist Great People Point
+													Double production speed with Marble
+West Point			Military Tradition	800			+4 experience for new units in this city
+					Level 5 unit					+1 engineer Great People Point
+													Double production speed with Stone
+Mt. Rushmore		Fascism				500			-25% war weariness in all cities
+													+4 culture
+													+1 artist Great People Point
+													Double production speed with Stone
+Red Cross			Medicine			600			Free Medic I promotion for units built in this city
+													+2 culture
+													+1 scientist Great People Point
+Scotland Yard		Communism			500			Required to train spy
+													+1 scientist Great People Point
+ 
+ * 
+ * 
+ * 
+ * 
+
+				Cost	Requires		Leads To				Units & Buildings Enabled		Special
+Agriculture		60						Animal Husbandry		Can Build Farm
+						Pottery				
+Alphabet		300		Writing			Literature				Enables Technology Trading
+						Drama				
+Animal Husbandry100		Hunting			Horseback Riding		Reveals Horse
+						Agriculture		Writing					Can Build Pasture
+Archery			60		Hunting									Archer		
+																Skirmisher		
+																Longbowman		
+																Crossbowman		
+																Cho-Ko-Nu		
+																Horse Archer		
+																Keshik		
+																Camel Archer		
+Artillery		4000	Rifling			Rocketry				Artillery		
+				Steel						
+				Physics						
+Assembly Line	5000	Corporation		Fascism					Infantry		
+						Steam Power		Industrialism			Factory		
+																Coal Plant		
+																The Pentagon		
+Astronomy		2000	Calendar		Physics					Galleon							Obsoletes Colossus
+						Optics			Scientific Method		Frigate							Enables traderoutes on ocean
+																Observatory		
+Banking		700			Currency		Economics				Bank							Civic: Mercantilism
+						Guilds			Replaceable Parts				
+Biology		3600		Chemistry		Refrigeration				Can build farms w/out irrigation
+				Scientific Method		Medicine				Farm: +1 food
+						Ecology				
+Bronze Working		120		Mining		Iron Working		Axeman		Can chop forest
+						Metal Casting				Reveals Copper
+										Civic: Slavery
+Calendar		350		Sailing		Astronomy				Can Build Plantation
+				Mathematics						Obsoletes Obelisk
+										Obsoletes Stonehenge
+										Centers World Map
+Chemistry		1800		Engineering		Steel		Grenadier		Obsoletes The Parthenon
+				Gunpowder		Steam Power		Frigate		Workshop: +1 Production
+						Biology				
+						Scientific Method				
+Civil Service		800		Code of Laws		Nationalism		Maceman		Civic: Bureaucracy
+				Feudalism		Paper		Samurai		Farms spread irrigation
+Code of Laws		350		Writing		Constitution		Courthouse		Enables Caste System
+				Priesthood		Civil Service		Chichen Itza		First to discover founds Confucianism
+				Currency		Philosophy				
+Combustion		3600		Railroad		Flight		Transport		Can Build Oil Well
+						Plastics		Destroyer		Obsoletes Whale
+								Submarine		
+Communism		2800		Liberalism				Spy		Enables Permanent Alliances
+				Scientific Method				Scotland Yard		Civic: State Property
+																Kremlin		
+Compass		400		Sailing		Optics		Explorer		
+				Iron Working				Harbor		
+Composites		7500		Satellites		Future Technology		Modern Armor		
+				Plastics				Jet Fighter		
+								Stealth Bomber		
+Computers		6500		Radio		Genetics		Modern Armor		Obsoletes Angkor Wat
+						Fiber Optics		Laboratory		Obsoletes Spiral Minaret
+						Robotics				
+Constitution		2000		Code of Laws		Corporation		Jail		Civic: Representation
+				Nationalism		Democracy				
+Construction		350		Masonry		Engineering		War Elephant		Enables Bridge Building
+				Mathematics				Catapult		
+								Colloseum		
+Corporation		1600		Economics		Assembly Line		Wall Street		Obsoletes Great Lighthouse
+				Constitution						+1 trade route per city
+Currency		400		Mathematics		Banking		Market		Enables Gold Trading
+						Code of Laws		Grocer		+1 trade route per city
+Democracy		2800		Printing Press				The Statue of Liberty		Civic: Universal Suffrage
+				Constitution						Civic: Emancipation
+Divine Right		1200		Monarchy		Nationalism		Versailles		First to discover founds Islam
+				Theology				The Spiral Minaret		
+Drama		300		Alphabet		Music		Theatre		Can adjust culture rate
+						Philosophy		Globe Theatre		
+Ecology		5500		Biology				Recycling Center		Can Scrub Fallout
+				Fission				SS Life Support		
+				Plastics						
+Economics		1400		Banking		Corporation				First to discover recieves a Great Merchant
+				Education						Civic: Free Market
+Education		1800		Paper		Liberalism		University		
+						Economics		Oxford University		
+						Gunpowder				
+Electricity		4500		Physics		Refrigeration		Bunker		Windmill: +1 commerce
+						Fission		Bomb Shelter		Watermill: +1 commerce
+						Radio		Broadway		
+						Industrialism				
+Engineering		1000		Construction		Chemistry		Pikeman		+1 road movement
+				Machinery				Castle		
+								The Hagia Sophia		
+Fascism		2400		Nationalism				Mt. Rushmore		Civic: Police State
+				Assembly Line						Enables Permanent Alliances
+Feudalism		700		Writing		Guilds		Longbowman		Civic: Vassalage
+				Monarchy		Civil Service				Civic: Serfdom
+Fiber Optics		7500		Computers		Fusion		The Internet		Obsoletes Kremlin
+				Satellites				SS Cockpit		
+				Plastics						
+Fishing		40				Sailing		Work Boat		Can work water tiles
+						Pottery				Can create fishing boats
+Fission		5500		Electricity		Fusion		ICBM		
+						Ecology		Nuclear Plant		
+								Manhattan Project		
+Flight		5000		Combustion		Rocketry		Carrier		
+				Physics				Fighter		
+								Bomber		
+								Gunship		
+								Jet Fighter		
+								Stealth Bomber		
+								Airport		
+Fusion		8000		Fission				SS Engine		First to discover recieves a Great Engineer
+				Fiber Optics						
+Genetics		7000		Refrigeration		Future Technology		SS Statis Chamber		+3 health in all cities
+				Computers						
+Guilds		1000		Feudalism		Banking		Knight		Workshop: +1 hammer
+				Machinery		Gunpowder		Camel Archer		
+								Conquistador		
+								Grocer		
+Gunpowder		1200		Guilds		Chemistry		Musketman		
+				Education		Rifling		Musketeer		
+								Cavalry		
+								Cossack		
+Horseback Riding		250		Animal Husbandry				Horse Archer		
+								Keshik		
+								Knight		
+								Camel Archer		
+								Conquistador		
+								Cavalry		
+								Cossack		
+Hunting		40				Archery		Scout		Can build Camps
+						Animal Husbandry		Spearman		
+								Phalanx		
+Industrialism		6500		Electricity		Plastics		Marine		Reveals Aluminum
+				Assembly Line				Navy Seal		Obsoletes Ivory
+								Tank		
+								Panzer		
+								Battleship		
+Iron Working		200		Bronze Working		Compass		Swordsman		Reveals Iron
+						Steel		Jaguar		Can remove Jungle
+								Praetorian		
+Liberalism		1400		Philosophy		Communism				First to discover recieves a free technology
+				Education						Civic: Free Speech
+										Civic: Free Religion
+Literature		200		Polytheism		Music		Heroic Epic		
+				Alphabet				National Epic		
+								Great Library		
+Machinery		700		Metal Casting		Optics		Crossbowman		Can build windmill
+						Guilds		Cho-Ko-Nu		Can build watermill
+						Engineering		Maceman		
+						Printing Press		Samurai		
+Masonry		80		Mining		Monotheism		Walls		Can build quarry
+				Mysticism		Construction		Aquaduct		
+								The Pyramids		
+								The Great Lighthouse 		
+Mass Media		3600		Radio				Broadcast Tower		
+								Hollywood		
+								United Nations		
+Mathematics		250		Writing		Calendar		Aquaduct		Can build fort
+						Construction		Hanging Gardens		+50% hammers from chopping
+						Currency				
+						Music				
+Medicine		4500		Optics				Hospital		Civic: Environmentalism
+				Biology				Red Cross		
+Meditation		80		Mysticism		Philosophy		Monastery		First to discover founds Buddhism
+						Priesthood				
+Metal Casting		450		Pottery		Machinery		Forge		Can build Workshop
+				Bronze Working				Colossus		
+Military Tradition		2000		Music				Cavalry		Enables Defensive Pact
+				Nationalism				Cossack		
+								West Point		
+Mining		50				Bronze Working				Can build mine
+						Masonry				
+Monarchy		300		Priesthood		Feudalism				Can build winery
+				Monotheism		Divine Right				Civic: Hereditary Rule
+Monotheism		120		Masonry		Theology				First to discover founds Judaism
+				Polytheism		Monarchy				Civic: Organized Religion
+Music		600		Mathematics		Military Tradition		Cathedral		First to discover recieves a great artist
+				Literature				Notre Dame		
+				Drama						
+Mysticism		50				Meditation		Obelisk		
+						Polytheism		Stonehenge		
+						Masonry				
+Nationalism		1800		Civil Service		Music		Hermitage		Civic: Nationhood
+				Philosophy		Constitution		The Taj Mahal		
+				Divine Right		Fascism				
+Optics		600		Compass		Astronomy		Caravel		+1 sight accross water
+				Machinery		Medicine				can create whaling boats
+Paper		600		Theology		Printing Press				Enables map trading
+				Civil Service		Education				
+Philosophy		800		Meditation		Liberalism		Angkor Wat		First to discover founds Taoism
+				Drama		Nationalism				Civic: Pacifism
+				Code of Laws						
+Physics		4000		Astronomy		Artillery				Reveals Uranium
+				Scientific Method		Electricity				First to discover recieves a Great Scientist
+						Flight				
+Plastics		7000		Combustion		Composoties		Hydro Plant		Obsoletes Fur
+				Industrialization		Robotics		Three Gorges Dam		Can create Offshore Platform
+						Ecology				
+						Fiber Optics				
+Polytheism		100		Mysticism		Monotheism		Parthenon		First to discover founds Hinduism
+						Literature				
+						Priesthood				
+Pottery		80		The Wheel		Metal Casting		Granary		Can build Cottage
+				Fishing		Writing				
+				Agriculture						
+Priesthood		60		Meditation		Writing		Temple		
+				Polytheism		Monarchy		Oracle		
+						Code of Laws				
+Printing Press		1600		Paper		Replaceable Parts				Village: +1 commerce
+				Machinery		Scientific Method				Town: +1 commerce
+						Democracy				
+Radio		6000		Electricity		Mass Media		Submarine		
+						Satellites		Bomber		
+						Computers		The Eiffel Tower		
+								Rock N Roll		
+Railroad		4500		Steel		Combustion		Machine Gun		Can build Railroad
+				Steam Power						
+Refrigeration		4000		Biology		Genetics		Supermarket		+1 move for water units
+				Electricity						
+Replaceable Parts		1800		Banking		Rifling				Can build Lumbermill
+				Printing Press		Steam Power				Windmill: +1 hammer
+										Watermill: +1 hammer
+Rifling		2400		Gunpowder		Artillery		Rifleman		Obsolets Chichen Itza
+				Replaceable Parts		Rocketry		Redcoat		
+								Infantry		
+								Marine		
+								Navy Seal		
+								Mech. Infantry		
+								Tank		
+								Panzer		
+Robotics		8000		Computers				Mech. Infantry		
+				Plastics				Stealth Bomber		
+								SS Docking Bay		
+								Space Elevator		
+Rocketry		5000		Rifling		Satellites		SAM Infantry		
+				Artillery				Gunship		
+				Flight				ICBM		
+								Apollo Program		
+								SS Casing		
+Sailing		100		Fishing		Calendar		Galley		Enables trade routes on coasts
+						Compass		Lighthouse		
+Satellites		6000		Rocketry		Composites		SDI		Reveals World Map
+				Radio		Fiber Optics		SS Thrusters		
+Scientific Method		2400		Printing Press		Communism				Reveals Oil
+				Chemistry		Biology				Obsoletes The Great Library
+				Astronomy		Physics				Obsoletes Monastery
+Steam Power		3200		Chemistry		Railroad		Ironclad		Reveals Coal
+				Replaceable Parts		Assembly Line				Workers build 50% faster
+										Obsoletes The Hagia Sophia
+Steel		2800		Iron Working		Artillery		Cannon		
+				Chemistry		Railroad		Ironclad		
+								Drydocks		
+								Ironworks		
+Theology		500		Writing		Divine Right		The Sistine Chapel		First to discover founds Christianity
+				Monotheism		Paper				Civic: Theocracy
+The Wheel		60				Pottery		Chariot		Can build Road
+								War Chariot		
+								Immortal		
+Writing		120		Priesthood		Mathematics		Library		Enables Open Borders
+				Pottery		Alphabet				
+				Animal Husbandry		Code of Laws				
+						Theology				
+						Feudalism				
+Future Technology		10000		Genetics						+1 health in all cities
+				Composites						+1 happiness in all cities
+  
+ */

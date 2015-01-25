@@ -284,8 +284,11 @@ namespace Server.Health
         private static void EventSink_CharacterCreatedHealthCheck(CharacterCreatedEventArgs args)
         {
             Mobile mobile = args.Mobile;
-            /* When a character is created, we add them to the system. */
-            Condition con = GetCondition(mobile);
+			if (mobile != null)
+			{
+				/* When a character is created, we add them to the system. */
+				Condition con = GetCondition(mobile);
+			}
         }
 
         private static void EventSink_HungerChangedHealthCheck(HungerChangedEventArgs args)

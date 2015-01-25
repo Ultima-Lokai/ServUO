@@ -74,7 +74,7 @@ namespace Server.Items
 
 			protected override void OnTarget( Mobile from, object targeted )
 			{
-				if ( m_RawFlax.Deleted )
+				if ( m_RawFlax.Deleted || targeted == null )
 					return;
 
 				ISpinningWheel wheel = targeted as ISpinningWheel;

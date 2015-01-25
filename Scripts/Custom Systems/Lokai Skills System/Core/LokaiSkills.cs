@@ -6,8 +6,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Server;
+using Server.Mobiles;
 using Server.Items;
 using Server.Network;
+using Server.UOC;
+using Server.Engines.XmlSpawner2;
 
 namespace Server
 {
@@ -194,8 +197,8 @@ namespace Server
                 return false;
             //else if (!from.Region.OnLokaiSkillUse(from, LokaiSkillID))
             //    return false;
-            //else if (!from.AllowLokaiSkillUse((LokaiSkillName)LokaiSkillID))
-            //    return false;
+            else if (from is PlayerMobile && !((PlayerMobile)from).AllowSkillUse((LokaiSkillName)LokaiSkillID))
+                return false;
 
             if (LokaiSkillID >= 0 && LokaiSkillID < LokaiSkillInfo.Table.Length)
             {
@@ -352,6 +355,11 @@ namespace Server
             if (change != 0.0)
                 m_Owner.SendMessage(string.Format("Your {0} skill has changed by {1}. It is now {2}.",
                         lokaiSkill.Name, change.ToString("F1"), lokaiSkill.Base.ToString("F1")));
+
+            CitizenAttachment ca = (CitizenAttachment)XmlAttach.FindAttachment(m_Owner, typeof(CitizenAttachment));
+            if (ca != null)
+                ca.OnSkillChange(lokaiSkill.LokaiSkillID, 2, oldValue);
+
             m_Owner.InvalidateProperties();
         }
 

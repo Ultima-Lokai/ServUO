@@ -66,11 +66,11 @@ namespace Server.Items
 
 		public static void OnSpun( ISpinningWheel wheel, Mobile from, int hue )
 		{
-			Item item = new ThreadSpool( 6 );
+			Item item = new WhiteYarn( 4 );
 			item.Hue = hue;
 
-			from.AddToBackpack( item );
-			from.SendLocalizedMessage( 1010577 ); // You put the spools of Thread in your backpack.
+            from.AddToBackpack(item);
+            from.SendLocalizedMessage(1010576); // You put the balls of yarn in your backpack.
 		}
 
 		private class PickWheelTarget : Target
@@ -84,7 +84,7 @@ namespace Server.Items
 
 			protected override void OnTarget( Mobile from, object targeted )
 			{
-				if ( m_RawCotton.Deleted )
+				if ( m_RawCotton.Deleted || targeted == null )
 					return;
 
 				ISpinningWheel wheel = targeted as ISpinningWheel;
@@ -92,22 +92,22 @@ namespace Server.Items
 				if ( wheel == null && targeted is AddonComponent )
 					wheel = ((AddonComponent)targeted).Addon as ISpinningWheel;
 
-				if ( wheel is Item )
-				{
-					Item item = (Item)wheel;
+                if (wheel is Item)
+                {
+                    Item item = (Item)wheel;
 
-					if ( !m_RawCotton.IsChildOf( from.Backpack ) )
-					{
-						from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
-					}
-					else if ( wheel.Spinning )
-					{
-						from.SendLocalizedMessage( 502656 ); // That spinning wheel is being used.
-					}
-					else
+                    if (!m_RawCotton.IsChildOf(from.Backpack))
+                    {
+                        from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
+                    }
+                    else if (wheel.Spinning)
+                    {
+                        from.SendLocalizedMessage(502656); // That spinning wheel is being used.
+                    }
+                    else
                     {
                         LokaiSkills skills = LokaiSkillUtilities.XMLGetSkills(from);
-                        LokaiSkill lokaiSkill = (LokaiSkillUtilities.XMLGetSkills(from)).Spinning;
+                        LokaiSkill lokaiSkill = skills.Spinning;
                         SuccessRating rating = LokaiSkillUtilities.CheckLokaiSkill(from, lokaiSkill, 0.0, 100.0);
 
                         if (rating >= SuccessRating.PartialSuccess)
@@ -130,12 +130,13 @@ namespace Server.Items
                             from.SendMessage("You have no idea how to use this thing.");
                             from.SendMessage("You fail utterly, some Raw Cotton is lost.");
                         }
-					}
-				}
-				else
-				{
-					from.SendLocalizedMessage( 502658 ); // Use that on a spinning wheel.
-				}
+                    }
+                }
+                else
+                {
+                    from.SendLocalizedMessage(502658); // Use that on a spinning wheel.
+                }
+                
 			}
 		}
 	}

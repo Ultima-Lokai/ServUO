@@ -84,7 +84,7 @@ namespace Server.Items
 
 			protected override void OnTarget( Mobile from, object targeted )
 			{
-				if ( m_RawWool.Deleted )
+				if ( m_RawWool.Deleted || targeted == null )
 					return;
 
 				ISpinningWheel wheel = targeted as ISpinningWheel;
@@ -134,7 +134,6 @@ namespace Server.Items
 				}
 				else
 				{
-                    from.SendMessage("Wheel was a {0}?",wheel.GetType().ToString());
 					from.SendLocalizedMessage( 502658 ); // Use that on a spinning wheel.
 				}
 			}

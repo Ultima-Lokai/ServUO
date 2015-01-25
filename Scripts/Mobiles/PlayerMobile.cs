@@ -1670,6 +1670,13 @@ namespace Server.Mobiles
 			SkillName.SpiritSpeak, SkillName.Stealing, SkillName.TasteID
 		};
 
+        public bool AllowSkillUse(LokaiSkillName skill)
+        {
+            LSA lsa = (LSA)XmlAttach.FindAttachment(this, typeof(LSA));
+            if (lsa == null) return false;
+            return lsa.AllowSkillUse((int)skill, 1);
+        }
+
 		public override bool AllowSkillUse(SkillName skill)
 		{
 			if (AnimalForm.UnderTransformation(this))
@@ -4069,7 +4076,12 @@ namespace Server.Mobiles
 			else if (IsPlayer())
 			{
 				list.Add(1070722, "Kills {0} / Deaths {1} : Rank={2}", a.Kills, a.Deaths, a.Rank);
-			}
+            }
+
+            foreach (XmlAttachment xmla in XmlAttach.FindAttachments(this))
+            {
+                xmla.GetPlayerMobileProperties(list);
+            }
 		}
 
 		public class PlayerPropertiesEventArgs : EventArgs
@@ -4324,6 +4336,16 @@ namespace Server.Mobiles
 				PlayerProperties(new PlayerPropertiesEventArgs(this, list));
 			}
 		}
+
+        public override void OnSkillsQuery(Mobile from)
+        {
+            if (from == this && !HasGump(typeof(ShowLokaiSkillsGump)))
+            {
+                if ((this.m_SessionStart + TimeSpan.FromSeconds(7.0)) > DateTime.Now) return;
+                from.SendGump(new ShowLokaiSkillsGump(from));
+            }
+            else base.OnSkillsQuery(from);
+        }
 
 		public override void OnSingleClick(Mobile from)
 		{
