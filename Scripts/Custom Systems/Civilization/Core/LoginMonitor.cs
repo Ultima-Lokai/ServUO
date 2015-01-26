@@ -6,7 +6,6 @@ using Server.Network;
 using Server;
 using Server.Items;
 using Server.Gumps;
-using Server.UOC.Items;
 using Server.Engines.XmlSpawner2;
 
 namespace Server.UOC
@@ -36,18 +35,25 @@ namespace Server.UOC
                     foreach (Item item in m.Items)
                         if (item.Layer != Layer.Shirt && item.Layer != Layer.Pants)
                             items.Add(item);
-                    Container cont = new PreCivChest();
-                    cont.Hue = 0x489;
-                    cont.Name = string.Format("{0}'s Chest of pre-Civ stuff.", m.Name);
-                    cont.Movable = false;
-                    //cont.Visible = false;
-                    foreach (Item i in items)
-                        cont.DropItem(i);
-                    Item chest = cont as Item;
-                    BankBox bank = m.BankBox;
-                    bank.DropItem(chest);
-                    //chest.Location = new Point3D(15, 160, 0);
-                    bank.MaxItems = 125 + items.Count;
+                    Container bank = m.BankBox;
+                    if (bank != null)
+                    {
+                        PreCivChest cont;
+                        cont = bank.FindItemByType(typeof(PreCivChest)) as PreCivChest;
+                        if (cont == null) cont = new PreCivChest();
+                        cont.Hue = 0x489;
+                        cont.Name = string.Format("{0}'s Chest of pre-Civ stuff.", m.Name);
+                        cont.Movable = false;
+                        cont.Visible = false;
+                        foreach (Item item in bank.Items)
+                            if (item.Parent != cont)
+                                items.Add(item);
+                        foreach (Item i in items)
+                            cont.DropItem(i);
+                        bank.DropItem(cont);
+                        //chest.Location = new Point3D(15, 160, 0);
+                        bank.MaxItems = bank.MaxItems + items.Count;
+                    }
                     Container pack = m.Backpack;
                     if (pack == null)
                     {

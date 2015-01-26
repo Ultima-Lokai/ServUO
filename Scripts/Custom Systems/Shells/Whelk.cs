@@ -1,20 +1,19 @@
 using System;
-using Server.Items;
+using Server;
 
-namespace Server.UOC
+namespace Server.Items
 {
-
-    [Furniture]
-    [Flipable(0xE43, 0xE42)]
-    public class PreCivChest : WoodenChest
+    public class Whelk : Item
     {
         [Constructable]
-        public PreCivChest()
-            : base()
+        public Whelk()
+            : base(0xFCB)
         {
+            Weight = 0.1;
+            Name = "a whelk shell";
         }
 
-        public PreCivChest(Serial serial)
+        public Whelk(Serial serial)
             : base(serial)
         {
         }

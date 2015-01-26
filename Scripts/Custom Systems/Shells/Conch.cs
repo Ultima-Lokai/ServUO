@@ -1,20 +1,19 @@
 using System;
-using Server.Items;
+using Server;
 
-namespace Server.UOC
+namespace Server.Items
 {
-
-    [Furniture]
-    [Flipable(0xE43, 0xE42)]
-    public class PreCivChest : WoodenChest
+    public class Conch : Item
     {
         [Constructable]
-        public PreCivChest()
-            : base()
+        public Conch()
+            : base(0xFC4)
         {
+            Weight = 0.1;
+            Name = "a conch shell";
         }
 
-        public PreCivChest(Serial serial)
+        public Conch(Serial serial)
             : base(serial)
         {
         }

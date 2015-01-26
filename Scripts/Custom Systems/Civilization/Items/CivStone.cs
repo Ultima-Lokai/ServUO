@@ -95,12 +95,13 @@ namespace Server.UOC.Items
                         if (cit != null)
                         {
                             int consumed = cit.MyCiv.AddToCoffer(stor, tokens.Amount);
-							Console.WriteLine("{0} tokens should have been consumed.", consumed);
+							Console.WriteLine("{0} tokens should have been added to the Coffers.", consumed);
                             if (consumed > 0)
                             {
                                 from.SendMessage("{0} {1} Tokens were added to your Civ's Coffers.", tokens.Amount, tokens.TokenType.ToString());
                                 m_Stone.InvalidateProperties();
-                                tokens.Consume();
+                                tokens.Consume(tokens.Amount);
+                                if (tokens != null && tokens.Amount <= 0) tokens.Delete();
                             }
                             else
                                 from.SendMessage("There was a problem adding the Tokens.");

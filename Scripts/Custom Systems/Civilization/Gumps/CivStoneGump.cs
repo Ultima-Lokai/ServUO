@@ -21,7 +21,7 @@ namespace Server.UOC
         {
             m_From = from;
             m_CivName = civName;
-
+            AddBackground(10, 10, 50, 50, 9000);
 
         }
 

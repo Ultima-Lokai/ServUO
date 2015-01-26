@@ -70,8 +70,20 @@ namespace Server.UOC
             if (UOC.CoreSystem.Running)
                 return;
             from.MoveToWorld(m_Point, m_Map);
+            Container bank = from.BankBox;
+            if (bank != null)
+            {
+                PreCivChest cont;
+                cont = bank.FindItemByType(typeof(PreCivChest)) as PreCivChest;
+                if (cont != null)
+                {
+                    cont.Visible = true;
+                    cont.Movable = true;
+                    bank.MaxItems = bank.MaxItems - cont.Items.Count;
+                }
+            }
             Delete();
-            
+
         }
     }
 }

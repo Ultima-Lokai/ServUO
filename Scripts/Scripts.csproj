@@ -1397,6 +1397,11 @@
     <Compile Include="Custom Systems\ACC\Public Gates\Items\PublicGate.cs" />
     <Compile Include="Custom Systems\ACC\Public Gates\PGEntry.cs" />
     <Compile Include="Custom Systems\ACC\Public Gates\PGSystem.cs" />
+    <Compile Include="Custom Systems\Branch Banking\BranchBankBox.cs" />
+    <Compile Include="Custom Systems\Branch Banking\BranchBanker.cs" />
+    <Compile Include="Custom Systems\Branch Banking\BranchBankGump.cs" />
+    <Compile Include="Custom Systems\Branch Banking\OpenBranchBankEntry.cs" />
+    <Compile Include="Custom Systems\Branch Banking\SBBranchBanker.cs" />
     <Compile Include="Custom Systems\Civilization\Buildings\Armory.cs" />
     <Compile Include="Custom Systems\Civilization\Buildings\Bank.cs" />
     <Compile Include="Custom Systems\Civilization\Buildings\Barracks.cs" />
@@ -1573,6 +1578,10 @@
     <Compile Include="Custom Systems\Lokai Skills System\WoodWorking\DefWoodworking.cs" />
     <Compile Include="Custom Systems\Lokai Skills System\WoodWorking\UnfinishedFurniture.cs" />
     <Compile Include="Custom Systems\Lokai Skills System\WoodWorking\WoodWorkersBenchEast.cs" />
+    <Compile Include="Custom Systems\Shells\Conch.cs" />
+    <Compile Include="Custom Systems\Shells\Nautilus.cs" />
+    <Compile Include="Custom Systems\Shells\SnailShell.cs" />
+    <Compile Include="Custom Systems\Shells\Whelk.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Items\Addons\Magincia Bazaar\Bazaar AddOns\Alchemist2BazaarAddon.cs" />
     <Compile Include="Items\Addons\Magincia Bazaar\Bazaar AddOns\ArmorBazaarAddon.cs" />
