@@ -75,17 +75,23 @@ namespace Server.UOC
             int TotalAdded;
             double Added = ((double)quantity * ((double)(Production.TotalProduction(this) + 100.0) / 100.0)
                 * ((double)(Corruption.TotalCorruption(this) + 100.0) / 100.0));
+			Console.WriteLine("Added = {0} after factoring Production and Corruption.", Added);
             double Extra, Wasted = 0.0;
             int OnHand = m_Coffers.Quantity[(int)store];
+			Console.WriteLine("OnHand = {0} ... This is how much the coffer currently holds.", OnHand);
             int Max = Coffer.Capacity(store, this);
+			Console.WriteLine("Max = {0} ... This is how much the coffer can hold.", Max);
             if (OnHand + quantity > Max)
             {
                 Extra = (double)(OnHand + quantity - Max);
                 Wasted = Extra * 0.5 / ((double)(Waste.TotalWaste(this) + 100.0) / 100.0);
             }
-            Wasted += Added / ((double)(Waste.TotalWaste(this) + 100.0) / 100.0);
-            Added = Added - Wasted;
-            TotalAdded = (int)Added;
+            Wasted += Added * ((double)(Waste.TotalWaste(this)) / 100.0);
+			Console.WriteLine("Wasted = {0} ... This is how much was wasted.", Wasted);
+            double newAdded = Added - Wasted;
+			Console.WriteLine("newAdded = Added - Wasted ... {0} = {1} - {2}.", newAdded, Added, Wasted);
+            TotalAdded = (int)newAdded;
+			Console.WriteLine("TotalAdded = {0} after factoring Waste.", TotalAdded);
             m_Coffers.Quantity[(int)store] += TotalAdded;
             return TotalAdded;
         }
@@ -205,7 +211,7 @@ namespace Server.UOC
             {
                 toGive = (int)Math.Ceiling((double)((sk + sk - cap) / 10));
                 if (toGive < 1) toGive = 1;
-                toGive = (int)Math.Ceiling((double)(toGive * (from.Str + from.Dex) / Utility.RandomMinMax(50, 80)));
+                toGive += (int)Math.Ceiling((double)(toGive * (from.Str + from.Dex) / Utility.RandomMinMax(50, 80)));
             }
             if (tokenType == TokenType.Technology)
             {

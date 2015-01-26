@@ -9,7 +9,7 @@ namespace Server.UOC.Governments
         {
             GovernmentType m_GovType = GovernmentType.Communism;
             TechType m_TechRequired = TechType.Communism;
-            string m_Description = "Communism temporary description.";
+            string m_Description = "No corruption, but reduced Satisfaction.";
             string m_Name = "Communism";
             int m_CitizensRequired = 16;
             int m_CorruptionFactor = 2;

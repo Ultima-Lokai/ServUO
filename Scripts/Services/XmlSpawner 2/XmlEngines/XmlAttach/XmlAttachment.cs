@@ -392,17 +392,14 @@ namespace Server.Engines.XmlSpawner2
         public virtual bool AllowSkillUse(SkillName skill)
         {
             if (AttachedTo is PlayerMobile)
-                return ((PlayerMobile)AttachedTo).AllowSkillUse((SkillName)skill);
+                return ((PlayerMobile)AttachedTo).AllowSkillUse((SkillName)skill, true);
             else
                 return false;
         }
 
         public virtual bool AllowSkillUse(int skill, int skillType)
         {
-            if (AttachedTo is PlayerMobile)
-                return ((PlayerMobile)AttachedTo).AllowSkillUse((SkillName)skill);
-            else
-                return false;
+            return false;
         }
 
         public virtual void GetPlayerMobileProperties(ObjectPropertyList list)

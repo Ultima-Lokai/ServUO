@@ -9,7 +9,7 @@ namespace Server.UOC.Governments
         {
             GovernmentType m_GovType = GovernmentType.Theocracy;
             TechType m_TechRequired = TechType.Theology;
-            string m_Description = "Theocracy temporary description.";
+            string m_Description = "Highest corruption, but Enormous Production and Satisfaction.";
             string m_Name = "Theocracy";
             int m_CitizensRequired = 40;
             int m_CorruptionFactor = -8;

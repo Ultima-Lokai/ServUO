@@ -41,6 +41,7 @@ using Server.Spells.Seventh;
 using Server.Spells.Sixth;
 using Server.Spells.Spellweaving;
 using Server.Targeting;
+using Server.UOC;
 
 using RankDefinition = Server.Guilds.RankDefinition;
 #endregion
@@ -1672,42 +1673,54 @@ namespace Server.Mobiles
 
         public bool AllowSkillUse(LokaiSkillName skill)
         {
-            LSA lsa = (LSA)XmlAttach.FindAttachment(this, typeof(LSA));
-            if (lsa == null) return false;
-            return lsa.AllowSkillUse((int)skill, 1);
+            CitizenAttachment cit = (CitizenAttachment)XmlAttach.FindAttachment(this, typeof(CitizenAttachment));
+            if (cit == null) return false;
+            return cit.AllowSkillUse((int)skill, 1);
+        }
+
+        public bool AllowSkillUse(SkillName skill, bool secondPass)
+        {
+            if (secondPass)
+            {
+                if (AnimalForm.UnderTransformation(this))
+                {
+                    for (int i = 0; i < m_AnimalFormRestrictedSkills.Length; i++)
+                    {
+                        if (m_AnimalFormRestrictedSkills[i] == skill)
+                        {
+                            #region Mondain's Legacy
+                            AnimalFormContext context = AnimalForm.GetContext(this);
+
+                            if (skill == SkillName.Stealing && context.StealingMod != null && context.StealingMod.Value > 0)
+                            {
+                                continue;
+                            }
+                            #endregion
+
+                            SendLocalizedMessage(1070771); // You cannot use that skill in this form.
+                            return false;
+                        }
+                    }
+                }
+
+                #region Dueling
+                if (m_DuelContext != null && !m_DuelContext.AllowSkillUse(this, skill))
+                {
+                    return false;
+                }
+                #endregion
+
+                return DesignContext.Check(this);
+            }
+            return false;
         }
 
 		public override bool AllowSkillUse(SkillName skill)
 		{
-			if (AnimalForm.UnderTransformation(this))
-			{
-				for (int i = 0; i < m_AnimalFormRestrictedSkills.Length; i++)
-				{
-					if (m_AnimalFormRestrictedSkills[i] == skill)
-					{
-						#region Mondain's Legacy
-						AnimalFormContext context = AnimalForm.GetContext(this);
+            CitizenAttachment cit = (CitizenAttachment)XmlAttach.FindAttachment(this, typeof(CitizenAttachment));
+            if (cit == null) return false;
+            return cit.AllowSkillUse(skill);
 
-						if (skill == SkillName.Stealing && context.StealingMod != null && context.StealingMod.Value > 0)
-						{
-							continue;
-						}
-						#endregion
-
-						SendLocalizedMessage(1070771); // You cannot use that skill in this form.
-						return false;
-					}
-				}
-			}
-
-			#region Dueling
-			if (m_DuelContext != null && !m_DuelContext.AllowSkillUse(this, skill))
-			{
-				return false;
-			}
-			#endregion
-
-			return DesignContext.Check(this);
 		}
 
 		private bool m_LastProtectedMessage;
@@ -4341,7 +4354,7 @@ namespace Server.Mobiles
         {
             if (from == this && !HasGump(typeof(ShowLokaiSkillsGump)))
             {
-                if ((this.m_SessionStart + TimeSpan.FromSeconds(7.0)) > DateTime.Now) return;
+                //if ((this.m_SessionStart + TimeSpan.FromSeconds(7.0)) con DateTime.Now) return;
                 from.SendGump(new ShowLokaiSkillsGump(from));
             }
             else base.OnSkillsQuery(from);

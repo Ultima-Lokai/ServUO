@@ -35,10 +35,7 @@ namespace Server.UOC
         {
         }
 
-        private CivEntry MyCiv()
-        {
-            return UOC.CoreSystem.CivEntries[HomeCivilization];
-        }
+        public CivEntry MyCiv { get { return UOC.CoreSystem.CivEntries[HomeCivilization]; } }
 
         public override void GetPlayerMobileProperties(ObjectPropertyList list)
         {
@@ -46,14 +43,15 @@ namespace Server.UOC
             {
                 list.Add("Citizen of {0}", m_HomeCivilization);
             }
+            base.GetPlayerMobileProperties(list);
         }
 
         public override void OnSkillChange(int skill, int skillType, double oldBase)
         {
             PlayerMobile m = Owner as PlayerMobile;
             if (m == null || skillType == 0) return;
-            TokenType currentTokenType = MyCiv().GetSkillTokenType(m, (LokaiSkillName)skill);
-            int toGive = MyCiv().GenerateCivTokens((LokaiSkillName)skill, m, currentTokenType);
+            TokenType currentTokenType = MyCiv.GetSkillTokenType(m, (LokaiSkillName)skill);
+            int toGive = MyCiv.GenerateCivTokens((LokaiSkillName)skill, m, currentTokenType);
             m.AddToBackpack(new CivTokens(toGive, currentTokenType));
             m.SendMessage("You have earned {0} {1} Tokens.", toGive, currentTokenType.ToString());
         }
@@ -62,8 +60,8 @@ namespace Server.UOC
         {
             PlayerMobile m = Owner as PlayerMobile;
             if (m == null) return;
-            TokenType currentTokenType = MyCiv().GetSkillTokenType(m, skill);
-            int toGive = MyCiv().GenerateCivTokens(skill, m, currentTokenType);
+            TokenType currentTokenType = MyCiv.GetSkillTokenType(m, skill);
+            int toGive = MyCiv.GenerateCivTokens(skill, m, currentTokenType);
             m.AddToBackpack(new CivTokens(toGive, currentTokenType));
             m.SendMessage("You have earned {0} {1} Tokens.", toGive, currentTokenType.ToString());
         }
@@ -74,7 +72,7 @@ namespace Server.UOC
             {
                 PlayerMobile m = Owner as PlayerMobile;
                 if (m == null || skillType == 0) return false;
-                if (MyCiv().AllowSkillUse(m, (LokaiSkillName)skill))
+                if (MyCiv.AllowSkillUse(m, (LokaiSkillName)skill))
                 {
                     return base.AllowSkillUse(skill, skillType);
                 }
@@ -93,7 +91,7 @@ namespace Server.UOC
             {
                 PlayerMobile m = Owner as PlayerMobile;
                 if (m == null) return false;
-                if (MyCiv().AllowSkillUse(m, skill))
+                if (MyCiv.AllowSkillUse(m, skill))
                 {
                     return base.AllowSkillUse(skill);
                 }

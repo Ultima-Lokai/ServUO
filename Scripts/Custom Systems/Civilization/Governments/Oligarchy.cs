@@ -9,7 +9,7 @@ namespace Server.UOC.Governments
         {
             GovernmentType m_GovType = GovernmentType.Oligarchy;
             TechType m_TechRequired = TechType.None;
-            string m_Description = "Oligarchy temporary description.";
+            string m_Description = "Basically like Anarchy, but can make Laws.";
             string m_Name = "Oligarchy";
             int m_CitizensRequired = 4;
             int m_CorruptionFactor = -5;

@@ -9,7 +9,7 @@ namespace Server.UOC.Governments
         {
             GovernmentType m_GovType = GovernmentType.Feudalism;
             TechType m_TechRequired = TechType.Feudalism;
-            string m_Description = "Feudalism temporary description.";
+            string m_Description = "Increased production, but high corruption and waste.";
             string m_Name = "Feudalism";
             int m_CitizensRequired = 0;
             int m_CorruptionFactor = -3;

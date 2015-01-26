@@ -27,6 +27,7 @@ namespace Server.UOC.Concepts
                 b = (BuildingType)civ.Buildings[x];
                 build = UOC.Building.Table[b] as Building;
                 //if (!BuildingObsolete(civ, b))
+                if (build != null)
                     total += build.CorruptionFactor;
             }
 
@@ -37,12 +38,14 @@ namespace Server.UOC.Concepts
                 t = (TechType)civ.Technologies[x];
                 tech = UOC.Technology.Table[t] as Technology;
                 //if (!TechObsolete(civ, t))
+                if (tech != null)
                     total += tech.CorruptionFactor;
             }
 
             GovernmentType g = civ.Government;
             Government gov = UOC.Government.Table[g] as Government;
-            total += gov.CorruptionFactor;
+            if (gov != null)
+                total += gov.CorruptionFactor;
 
             return total;
         }

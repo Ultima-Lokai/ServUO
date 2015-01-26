@@ -11,9 +11,9 @@ using Server.Regions;
 
 namespace Server.Items
 {
-    public enum MagicBallState { Idle, Following, Remaining, Acting }
+    public enum MysticBallState { Idle, Following, Remaining, Acting }
 
-    public class MagicCrystalBall : Item, TranslocationItem
+    public class MysticCrystalBall : Item, TranslocationItem
     {
         private const bool m_NeedSkillToFollow = true;
         private const bool m_NeedSecondSkillToFollow = true;
@@ -29,7 +29,7 @@ namespace Server.Items
         private Point3D m_UserLocation;
         private Map m_UserMap;
 
-        private MagicBallState m_State;
+        private MysticBallState m_State;
         private int m_Charges;
         private int m_Recharges;
 
@@ -47,7 +47,7 @@ namespace Server.Items
 
         public Point3D UserLocation { get { return m_UserLocation; } set { m_UserLocation = value; } }
         public Map UserMap { get { return m_UserMap; } set { m_UserMap = value; } }
-        public MagicBallState State { get { return m_State; } set { m_State = value; } }
+        public MysticBallState State { get { return m_State; } set { m_State = value; } }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public SkillNameValue FollowSkill { get { return m_FollowSkill; } set { m_FollowSkill = value; } }
@@ -104,7 +104,7 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int MaxRecharges { get { return 255; } }
 
-        public string TranslocationItemName { get { return "magic crystal ball"; } }
+        public string TranslocationItemName { get { return "Mystic crystal ball"; } }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public Mobile Subject
@@ -130,27 +130,27 @@ namespace Server.Items
         public string SubjectName { get { return m_SubjectName; } }
 
         [Constructable]
-        public MagicCrystalBall()
+        public MysticCrystalBall()
             : base(0xE2E)
         {
             Weight = 10.0;
             Light = LightType.Circle150;
 
             m_Charges = Utility.RandomMinMax(3, 9);
-            m_State = MagicBallState.Idle;
+            m_State = MysticBallState.Idle;
 
             m_SubjectName = "";
         }
 
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            list.Add("Magic Crystal Ball: [charges: {0}] [subject: {1}]", 
+            list.Add("Mystic Crystal Ball: [charges: {0}] [subject: {1}]", 
                 m_Charges.ToString(), m_SubjectName == "" ? "(not set)" : m_SubjectName);
         }
 
         public override void OnSingleClick(Mobile from)
         {
-            LabelTo(from, "Magic Crystal Ball: [charges: {0}] [subject: {1}]", 
+            LabelTo(from, "Mystic Crystal Ball: [charges: {0}] [subject: {1}]", 
                 m_Charges.ToString(), m_SubjectName == "" ? "(not set)" : m_SubjectName);
         }
 
@@ -224,9 +224,9 @@ namespace Server.Items
 
         private class SubjectLinkTarget : Target
         {
-            private MagicCrystalBall m_Ball;
+            private MysticCrystalBall m_Ball;
 
-            public SubjectLinkTarget(MagicCrystalBall ball)
+            public SubjectLinkTarget(MysticCrystalBall ball)
                 : base(-1, false, TargetFlags.None)
             {
                 m_Ball = ball;
@@ -286,7 +286,7 @@ namespace Server.Items
             {
                 from.SendMessage("The Crystal Ball fills with an orange mist. You must be alive and unhidden to begin following.");
             }
-            else if (m_State != MagicBallState.Idle)
+            else if (m_State != MysticBallState.Idle)
             {
                 from.SendMessage("The Crystal Ball shimmers. It is not ready to be used yet.");
             }
@@ -322,13 +322,13 @@ namespace Server.Items
                 UserMap = from.Map;
                 from.Hidden = true;
                 from.Paralyzed = true;
-                State = MagicBallState.Following;
+                State = MysticBallState.Following;
                 CurrentUser = from;
 
                 CountDown = Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(2.0), (int)(duration / 2),
                     new TimerStateCallback(Tick), new object[] { from, duration });
 
-                Timer t = new MagicBallIdleTimer(from, this, TimeSpan.FromSeconds(duration));
+                Timer t = new MysticBallIdleTimer(from, this, TimeSpan.FromSeconds(duration));
                 t.Start();
 
                 from.MoveToWorld(subject.Location, subject.Map);
@@ -348,14 +348,14 @@ namespace Server.Items
             {
                 if (from.Hidden)
                 {
-                    if ((State == MagicBallState.Remaining || State == MagicBallState.Acting)
+                    if ((State == MysticBallState.Remaining || State == MysticBallState.Acting)
                         && NeedSkillToRemain && !from.CheckSkill(RemainSkill.Name, RemainSkill.Value, 120))
                     {
                         from.SendMessage("You lacked enough {0} to move with your subject.", RemainSkill.Name.ToString());
                     }
                     else
                         from.MoveToWorld(Subject.Location, Subject.Map);
-                    if (State != MagicBallState.Acting) State = MagicBallState.Remaining;
+                    if (State != MysticBallState.Acting) State = MysticBallState.Remaining;
                     from.SendGump(new FollowerGump(this, timeleft));
                     param[1] = (double)(timeleft - 2);
                 }
@@ -379,7 +379,7 @@ namespace Server.Items
             from.CloseGump(typeof(ActionGump));
             from.SendMessage("The mist fades from the Crystal Ball. You have stopped following your subject.");
 
-            State = MagicBallState.Idle;
+            State = MysticBallState.Idle;
             CurrentUser = null;
         }
 
@@ -405,7 +405,7 @@ namespace Server.Items
             InvalidateProperties();
         }
 
-        public MagicCrystalBall(Serial serial)
+        public MysticCrystalBall(Serial serial)
             : base(serial)
         {
         }
@@ -466,7 +466,7 @@ namespace Server.Items
                         this.Subject = (Mobile)reader.ReadMobile();
                         m_SubjectName = reader.ReadString();
 
-                        m_State = MagicBallState.Idle;
+                        m_State = MysticBallState.Idle;
 
                         break;
                     }
@@ -484,9 +484,9 @@ namespace Server.Items
 
     public class FollowerGump : Gump
     {
-        private MagicCrystalBall m_Ball;
+        private MysticCrystalBall m_Ball;
 
-        public FollowerGump(MagicCrystalBall ball, int duration)
+        public FollowerGump(MysticCrystalBall ball, int duration)
             : base(40, 40)
         {
             Dragable = false;
@@ -496,7 +496,7 @@ namespace Server.Items
             m_Ball = ball;
             AddPage(0);
             AddBackground(0, 0, 400, 40, 9200);
-            if (m_Ball.State == MagicBallState.Following || m_Ball.State == MagicBallState.Remaining)
+            if (m_Ball.State == MysticBallState.Following || m_Ball.State == MysticBallState.Remaining)
                 AddButton(5, 9, 2020, 2019, 1, GumpButtonType.Reply, 0);
             AddLabel(77, 10, 0, string.Format("You have {0} seconds to view your subject.", duration.ToString()));
         }
@@ -506,7 +506,7 @@ namespace Server.Items
             Mobile from = sender.Mobile;
             if (info.ButtonID == 1)
             {
-                m_Ball.State = MagicBallState.Acting;
+                m_Ball.State = MysticBallState.Acting;
                 from.SendGump(new ActionGump(m_Ball, from));
             }
         }
@@ -514,9 +514,9 @@ namespace Server.Items
 
     public class ActionGump : Gump
     {
-        private MagicCrystalBall m_Ball;
+        private MysticCrystalBall m_Ball;
 
-        public ActionGump(MagicCrystalBall ball, Mobile from)
+        public ActionGump(MysticCrystalBall ball, Mobile from)
             : base(40, 82)
         {
             from.CloseGump(typeof(ActionGump));
@@ -552,17 +552,17 @@ namespace Server.Items
                     }
                 }
             }
-            if (m_Ball.State == MagicBallState.Acting) m_Ball.State = MagicBallState.Following;
+            if (m_Ball.State == MysticBallState.Acting) m_Ball.State = MysticBallState.Following;
             from.CloseGump(typeof(ActionGump));
         }
     }
 
-    class MagicBallIdleTimer : Timer
+    class MysticBallIdleTimer : Timer
     {
-        private MagicCrystalBall m_Ball;
+        private MysticCrystalBall m_Ball;
         private Mobile m_Follower;
 
-        public MagicBallIdleTimer(Mobile follower, MagicCrystalBall ball, TimeSpan delay)
+        public MysticBallIdleTimer(Mobile follower, MysticCrystalBall ball, TimeSpan delay)
             : base(delay)
         {
             m_Follower = follower;

@@ -49,7 +49,7 @@
     <Compile Include="LinkedBooks\LinkedBooks.cs" />
     <Compile Include="LinkedGates\LinkedGate.cs" />
     <Compile Include="LinkedGates\LinkedGateBag.cs" />
-    <Compile Include="MagicCrystalBall\MagicCrystalBall.cs" />
+    <Compile Include="MysticCrystalBall\MysticCrystalBall.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Scripts\Scripts.csproj">
