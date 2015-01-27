@@ -1580,6 +1580,7 @@
     <Compile Include="Custom Systems\Lokai Skills System\WoodWorking\WoodWorkersBenchEast.cs" />
     <Compile Include="Custom Systems\Shells\Conch.cs" />
     <Compile Include="Custom Systems\Shells\Nautilus.cs" />
+    <Compile Include="Custom Systems\Shells\ShellNecklaces.cs" />
     <Compile Include="Custom Systems\Shells\SnailShell.cs" />
     <Compile Include="Custom Systems\Shells\Whelk.cs" />
     <Compile Include="GlobalSuppressions.cs" />

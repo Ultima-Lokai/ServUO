@@ -8,6 +8,7 @@ using Server.Mobiles;
 using Server.Items;
 using Server.Network;
 using Server.Engines.XmlSpawner2;
+using Server.UOC;
 
 namespace Server
 {
@@ -329,6 +330,7 @@ namespace Server
         public static SuccessRating CheckLokaiSkill(Mobile from, LokaiSkill lokaiSkill, double minLokaiSkill, double maxLokaiSkill)
         {
             double value = lokaiSkill.Value;
+            double oldBase = lokaiSkill.Base;
 
             if (value < minLokaiSkill)
                 return SuccessRating.TooDifficult; // Too difficult
@@ -376,6 +378,13 @@ namespace Server
                 rating = SuccessRating.CompleteSuccess;
             else if (chance - random <= 0.9)
                 rating = SuccessRating.ExceptionalSuccess;
+
+            if (rating >= SuccessRating.PartialSuccess)
+            {
+                CitizenAttachment ca = (CitizenAttachment)XmlAttach.FindAttachment(from, typeof(CitizenAttachment));
+                if (ca != null)
+                    ca.OnSkillChange(lokaiSkill.LokaiSkillID, 2, oldBase);
+            }
 
             return rating;
         }

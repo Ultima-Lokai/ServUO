@@ -66,6 +66,18 @@ namespace Server.Engines.XmlSpawner2
                     sailing >= (int)SailingRank.Novice ? (int)SailingRank.Novice : (int)SailingRank.Landlubber;
                 list.Add("{0} Sailor", ((SailingRank)sailing).ToString());
             }
+            else if (Skills.Highest.Base >= 120)
+            {
+                list.Add("Ledgendary {0}", Skills.Highest.Info.Title);
+            }
+            else if (Skills.Highest.Base >= 100)
+            {
+                list.Add("Grand Master {0}", Skills.Highest.Info.Title);
+            }
+            else if (Skills.Highest.Base >= 90)
+            {
+                list.Add("Expert {0}", Skills.Highest.Info.Title);
+            }
         }
 
         public override void Serialize(GenericWriter writer)

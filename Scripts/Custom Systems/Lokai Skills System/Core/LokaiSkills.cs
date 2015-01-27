@@ -356,10 +356,6 @@ namespace Server
                 m_Owner.SendMessage(string.Format("Your {0} skill has changed by {1}. It is now {2}.",
                         lokaiSkill.Name, change.ToString("F1"), lokaiSkill.Base.ToString("F1")));
 
-            CitizenAttachment ca = (CitizenAttachment)XmlAttach.FindAttachment(m_Owner, typeof(CitizenAttachment));
-            if (ca != null)
-                ca.OnSkillChange(lokaiSkill.LokaiSkillID, 2, oldValue);
-
             m_Owner.InvalidateProperties();
         }
 

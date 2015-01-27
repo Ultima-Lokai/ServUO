@@ -220,6 +220,7 @@ namespace Server.UOC
                 toGive += from.Luck < 100 ? 0 : from.Luck < 300 ? 2 : from.Luck < 500 ? 4 : from.Luck < 700 ? 6 : 8;
                 toGive = (int)Math.Ceiling((double)(toGive * (from.Int + from.Dex) / Utility.RandomMinMax(80, 130)));
             }
+            if (toGive < 1) toGive = 1;
             return toGive;
         }
 
@@ -241,6 +242,7 @@ namespace Server.UOC
                 toGive += from.Luck < 100 ? 0 : from.Luck < 300 ? 2 : from.Luck < 500 ? 4 : from.Luck < 700 ? 6 : 8;
                 toGive = (int)Math.Ceiling((double)(toGive * (from.Int + from.Dex) / Utility.RandomMinMax(80, 130)));
             }
+            if (toGive < 1) toGive = 1;
             return toGive;
         }
 
