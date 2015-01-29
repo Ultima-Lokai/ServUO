@@ -34,6 +34,11 @@ namespace Server.Mobiles
 	{
 		private const int MaxSell = 500;
 
+        // LOKAI ADDITIONS HERE **************************************************************** START ////
+        private bool haggleWeary;
+        private DateTime wearyExpiration;
+        // LOKAI ADDITIONS HERE **************************************************************** END //////
+
 		protected abstract List<SBInfo> SBInfos { get; }
 
 		private readonly ArrayList m_ArmorBuyInfo = new ArrayList();
@@ -172,32 +177,36 @@ namespace Server.Mobiles
 			}
 		}
 
-		public BaseVendor(string title)
-			: base(AIType.AI_Vendor, FightMode.None, 2, 1, 0.5, 2)
-		{
-			LoadSBInfo();
+        public BaseVendor(string title)
+            : base(AIType.AI_Vendor, FightMode.None, 2, 1, 0.5, 2)
+        {
+            LoadSBInfo();
 
-			Title = title;
+            Title = title;
 
-			InitBody();
-			InitOutfit();
+            InitBody();
+            InitOutfit();
 
-			Container pack;
-			//these packs MUST exist, or the client will crash when the packets are sent
-			pack = new Backpack();
-			pack.Layer = Layer.ShopBuy;
-			pack.Movable = false;
-			pack.Visible = false;
-			AddItem(pack);
+            Container pack;
+            //these packs MUST exist, or the client will crash when the packets are sent
+            pack = new Backpack();
+            pack.Layer = Layer.ShopBuy;
+            pack.Movable = false;
+            pack.Visible = false;
+            AddItem(pack);
 
-			pack = new Backpack();
-			pack.Layer = Layer.ShopResale;
-			pack.Movable = false;
-			pack.Visible = false;
-			AddItem(pack);
+            pack = new Backpack();
+            pack.Layer = Layer.ShopResale;
+            pack.Movable = false;
+            pack.Visible = false;
+            AddItem(pack);
 
-			m_LastRestock = DateTime.UtcNow;
-		}
+            m_LastRestock = DateTime.UtcNow;
+
+            // LOKAI ADDITIONS HERE **************************************************************** START ////
+            haggleWeary = false;
+            // LOKAI ADDITIONS HERE **************************************************************** END //////
+        }
 
 		public BaseVendor(Serial serial)
 			: base(serial)
@@ -1318,13 +1327,18 @@ namespace Server.Mobiles
 			cont = buyer.Backpack;
 			if (!bought && cont != null)
 			{
+                // LOKAI ADDITIONS HERE **************************************************************** START ////
+
+
+
+                // LOKAI ADDITIONS HERE **************************************************************** END //////
 				if (cont.ConsumeTotal(typeof(Gold), totalCost))
 				{
 					bought = true;
 				}
 				else if (totalCost < 2000)
 				{
-					SayTo(buyer, 500192); //Begging thy pardon, but thou casnt afford that.
+					SayTo(buyer, 500192); //Begging thy pardon, but thou canst afford that.
 				}
 			}
 
@@ -1643,7 +1657,12 @@ namespace Server.Mobiles
 			}
 
 			if (GiveGold > 0)
-			{
+            {
+                // LOKAI ADDITIONS HERE **************************************************************** START ////
+
+
+
+                // LOKAI ADDITIONS HERE **************************************************************** END //////
 				while (GiveGold > 60000)
 				{
 					seller.AddToBackpack(new Gold(60000));
@@ -1801,7 +1820,11 @@ namespace Server.Mobiles
 				IsParagon = false;
 			}
 
-			Timer.DelayCall(TimeSpan.Zero, CheckMorph);
+            Timer.DelayCall(TimeSpan.Zero, CheckMorph);
+
+            // LOKAI ADDITIONS HERE **************************************************************** START ////
+            haggleWeary = false; //                no need to Serialize this                                 //
+            // LOKAI ADDITIONS HERE **************************************************************** END //////
 		}
 
 		public override void AddCustomContextEntries(Mobile from, List<ContextMenuEntry> list)

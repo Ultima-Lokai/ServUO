@@ -247,7 +247,7 @@ namespace Server.Misc
 				{
 					case "shutdown":
 						{
-							AutoSave.Save();
+							AutoSave.Save(true);
 							Core.Process.Kill();
 						}
 						break;
@@ -257,7 +257,7 @@ namespace Server.Misc
 					case "restart":
 						{
 							BroadcastMessage(AccessLevel.Player, 0x35, String.Format("[Server] We are restarting..."));
-							AutoSave.Save();
+                            AutoSave.Save(true);
 							Process.Start(Core.ExePath, Core.Arguments);
 							Core.Process.Kill();
 						}
@@ -296,7 +296,7 @@ namespace Server.Misc
 						}
 						break;
 					case "save":
-						AutoSave.Save();
+                        AutoSave.Save(true);
 						break;
 					case "hear": //credit to Zippy for the HearAll script!
 						{

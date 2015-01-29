@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <places>
 	<parent name="Trammel">
+		<parent name="Inns and Taverns">
+			<parent name="Inns">
+				<child name="Abbey Innkeeper" x="610" y="810" z="20" />
+				<child name="The Barely Inn" x="5197" y="4060" z="50" />
+				<child name="The Broken Arrow Inn" x="2967" y="3408" z="20" />
+				<child name="bunkhouse" x="5310" y="34" z="20" />
+				<child name="The Falconers Inn" x="606" y="2243" z="20" />
+				<child name="The Ironwood Inn" x="2778" y="966" z="20" />
+				<child name="The Just Inn" x="5775" y="3161" z="20" />
+				<child name="Moonglow Student Hostel" x="4484" y="1064" z="20" />
+				<child name="The Morning Star Inn" x="1360" y="3815" z="20" />
+				<child name="The North Side Inn" x="1458" y="1525" z="20" />
+				<child name="The Peg Leg Inn" x="2715" y="2098" z="20" />
+				<child name="Restful Slumber" x="3732" y="1306" z="20" />
+				<child name="The Rusty Anchor" x="2033" y="2801" z="20" />
+				<child name="The Scholars Inn" x="4401" y="1165" z="20" />
+				<child name="Seekers Inn" x="5165" y="30" z="20" />
+				<child name="The Shattered Skull" x="554" y="2178" z="20" />
+				<child name="The Stag and Lion" x="3695" y="2160" z="20" />
+				<child name="Sweet Dreams" x="1493" y="1619" z="20" />
+				<child name="The Travelers Inn" x="1844" y="2735" z="20" />
+				<child name="Vesper Youth Hostel" x="2962" y="885" z="20" />
+				<child name="The Wayfarers Inn" x="1585" y="1591" z="20" />
+				<child name="Windy Inn" x="5218" y="175" z="20" />
+				<child name="The Albatross" x="3672" y="2654" z="20" />
+				<child name="The Bountiful Harvest" x="3673" y="2614" z="20" />
+			</parent>
+			<parent name="Taverns">
+				<child name="The Barnacle" x="2475" y="397" z="20" />
+				<child name="The Blue Boar" x="1498" y="1691" z="20" />
+				<child name="The Cats Lair" x="1427" y="1716" z="20" />
+				<child name="The Dog and Lion Pub" x="2972" y="3425" z="20" />
+				<child name="Fishermans Brew" x="3012" y="3457" z="20" />
+				<child name="Great Horns Tavern" x="3730" y="2218" z="20" />
+				<child name="The Horses Head" x="1452" y="3770" z="20" />
+				<child name="The Keg and Anchor" x="1935" y="2796" z="20" />
+				<child name="The Marsh Hall" x="2901" y="908" z="20" />
+				<child name="Mystical Spirits" x="3769" y="1218" z="20" />
+				<child name="The Pirates Plunder" x="2680" y="2238" z="20" />
+				<child name="The Salty Dog" x="1620" y="1586" z="20" />
+				<child name="The Silver Bow" x="3736" y="1255" z="20" />
+				<child name="The Unicorns Horn" x="1547" y="1768" z="20" />
+			</parent>
+		</parent>
 		<parent name="Dungeons">
 			<parent name="Blighted Grove">
 				<child name="Entrance" x="586" y="1643" z="-5" />

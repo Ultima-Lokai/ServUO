@@ -1904,7 +1904,6 @@
     <Compile Include=".\Items\Special\Bulk Order Rewards\Blacksmithy\GlovesOfMining.cs" />
     <Compile Include=".\Items\Special\Bulk Order Rewards\Blacksmithy\HammerOfHephaestus.cs" />
     <Compile Include=".\Items\Special\Bulk Order Rewards\Blacksmithy\PowderOfTemperament.cs" />
-    <Compile Include=".\Items\Special\Community Collection\JesterHatofChuckles.cs" />
     <Compile Include=".\Items\Special\Evil Home Decor Collection\AwesomeDisturbingPortrait.cs" />
     <Compile Include=".\Items\Special\Evil Home Decor Collection\BedOfNails.cs" />
     <Compile Include=".\Items\Special\Evil Home Decor Collection\BoneCouch.cs" />

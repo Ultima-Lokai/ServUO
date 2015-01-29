@@ -1,0 +1,107 @@
+
+
+# britain
+# bulletin board
+BulletinBoard 0x1E5F
+1600 1595 20
+
+# britain
+# bulletin board
+BulletinBoard 0x1E5E
+1504 1626 20
+1413 1720 20
+1478 1520 20
+
+# jhelom
+# bulletin board
+BulletinBoard 0x1E5E
+1445 3784 0
+1369 3824 0
+
+# minoc
+# bulletin board
+BulletinBoard 0x1E5E
+2467 413 15
+2433 536 0
+
+# moonglow
+# bulletin board
+BulletinBoard 0x1E5E
+4406 1168 0
+4481 1072 0
+
+# serpents hold
+# bulletin board
+BulletinBoard 0x1E5E
+3017 3450 15
+2879 3464 15
+
+# serpents hold
+# bulletin board
+BulletinBoard 0x1E5E
+2976 3412 15
+
+# skara brae
+# bulletin board
+BulletinBoard 0x1E5F
+616 2237 0
+
+# skara brae
+# bulletin board
+BulletinBoard 0x1E5E
+573 2176 0
+
+# trinsic
+# bulletin board
+BulletinBoard 0x1E5E
+1848 2744 0
+1932 2786 0
+2035 2813 10
+
+# vesper
+# bulletin board
+BulletinBoard 0x1E5F
+2976 882 0
+
+# vesper
+# bulletin board
+BulletinBoard 0x1E5E
+2909 904 0
+2773 976 0
+
+# yew
+# bulletin board
+BulletinBoard 0x1E5E
+637 856 0
+
+# delucia
+# bulletin board
+BulletinBoard 0x1E5F
+5204 4066 37
+
+# papua
+# bulletin board
+BulletinBoard 0x1E5E
+5765 3174 0
+
+# wind
+# bulletin board
+BulletinBoard 0x1E5E
+5305 42 40
+5166 40 22
+5218 183 5
+
+# bucs den
+# bulletin board
+BulletinBoard 0x1E5E
+2713 2104 0
+
+# nujel'm
+# bulletin board
+BulletinBoard 0x1E5E
+3742 1312 0
+
+# magincia
+# bulletin board
+BulletinBoard 0x1E5E
+3709 2160 20
