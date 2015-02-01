@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <prefix>[</prefix>
+  <multiPatch multiIdxTarget="" multiMulTarget="" />
+  <server id="0f095708-cd9f-4ae1-b9e6-ed7f62434706">
+    <name>Lokai Shard</name>
+    <password>
+    </password>
+    <ip>192.168.254.4</ip>
+    <port>2594</port>
+    <acct>Lokai</acct>
+  </server>
+</settings>

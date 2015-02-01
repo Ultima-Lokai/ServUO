@@ -75,6 +75,34 @@ namespace Server.Spells.Third
             this.FinishSequence();
         }
 
+        #region Grab
+        public void Target(Item item)
+        {
+            if (this.CheckSequence())
+            {
+                SpellHelper.Turn(this.Caster, item);
+
+                object root = item.RootParent;
+
+                if (item.Movable == false) Caster.SendMessage("You can not manipulate non-movable items.");
+                else if (!Caster.CanSee(item)) Caster.SendMessage("That is out of sight.");
+                else if (item.Amount > 1) Caster.SendMessage("you can not manipulate a stack of items.");
+                else if (item.Weight > (Caster.Int / 20)) Caster.SendMessage("That is to heavy to manipulate.");
+                else if (item.RootParentEntity != null) Caster.SendMessage("You can not manipulate objects that are inside of other objects or being worn.");
+
+                else
+                {
+                    Effects.SendLocationParticles(EffectItem.Create(item.Location, item.Map, EffectItem.DefaultDuration), 0x376A, 9, 32, 5022);
+                    Effects.PlaySound(item.Location, item.Map, 0x1F5);
+                    Caster.AddToBackpack(item);
+                    Caster.SendMessage("You manipulate the object to within your grasp and place it in your backpack.");
+                }
+            }
+            //else Caster.SendMessage( "You cannot use telekenisis on that." );
+            this.FinishSequence();
+        }
+        #endregion
+
         public class InternalTarget : Target
         {
             private readonly TelekinesisSpell m_Owner;
@@ -90,6 +118,8 @@ namespace Server.Spells.Third
                     this.m_Owner.Target((ITelekinesisable)o);
                 else if (o is Container)
                     this.m_Owner.Target((Container)o);
+                else if (o is Item)
+                    this.m_Owner.Target((Item)o);
                 else
                     from.SendLocalizedMessage(501857); // This spell won't work on that!
             }
