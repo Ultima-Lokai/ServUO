@@ -38,7 +38,7 @@ BulletinBoard 0x1E5E
 
 # serpents hold
 # bulletin board
-BulletinBoard 0x1E5E
+BulletinBoard 0x1E5F
 2976 3412 15
 
 # skara brae
