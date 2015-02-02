@@ -71,6 +71,8 @@
     <Compile Include="Music System\Play.cs" />
     <Compile Include="Music System\SynthGump.cs" />
     <Compile Include="Music System\XmlMusic.cs" />
+    <Compile Include="OverlayBackpackIdea\DefaultPack.cs" />
+    <Compile Include="OverlayBackpackIdea\OverlayBackpack.cs" />
     <Compile Include="ProvingGroundAddon.cs" />
     <Compile Include="SearchImage.cs" />
     <Compile Include="SkillBall.cs" />
