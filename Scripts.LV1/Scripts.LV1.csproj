@@ -52,6 +52,7 @@
     <Compile Include="Bible System\TopicParse.cs" />
     <Compile Include="Bible System\TopicReader.cs" />
     <Compile Include="Bible System\WanderingPreacher.cs" />
+    <Compile Include="Fertilizer System\DungBucket.cs" />
     <Compile Include="Fertilizer System\DungPile.cs" />
     <Compile Include="Fertilizer System\DungShovel.cs" />
     <Compile Include="Fertilizer System\FarmCow.cs" />

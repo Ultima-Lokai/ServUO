@@ -1,4 +1,15 @@
-﻿using System;
+﻿// Dung and Fertilizer System
+// Written for Free Ultima Online Emulation Shards
+// by Lokai (c) 2015
+/***************************************************************************
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ ***************************************************************************/
+using System;
 using Server.Items;
 
 namespace Server.Mobiles
@@ -56,7 +67,7 @@ namespace Server.Mobiles
             private FarmCow cow;
 
             public InternalTimer(Mobile p)
-                : base(TimeSpan.FromSeconds(60.0), TimeSpan.FromSeconds(300.0))
+                : base(TimeSpan.FromMinutes(1.0), TimeSpan.FromMinutes(7.0))
             {
                 Priority = TimerPriority.FiftyMS;
                 cow = ((FarmCow)p);
@@ -187,6 +198,9 @@ namespace Server.Mobiles
                 this.m_MilkedOn = reader.ReadDateTime();
                 this.m_Milk = reader.ReadInt();
             }
+
+            Timer DungTimer = new InternalTimer(this);
+            DungTimer.Start();
         }
     }
 }
