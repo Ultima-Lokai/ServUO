@@ -52,6 +52,9 @@
     <Compile Include="Bible System\TopicParse.cs" />
     <Compile Include="Bible System\TopicReader.cs" />
     <Compile Include="Bible System\WanderingPreacher.cs" />
+    <Compile Include="Fertilizer System\DungPile.cs" />
+    <Compile Include="Fertilizer System\DungShovel.cs" />
+    <Compile Include="Fertilizer System\FarmCow.cs" />
     <Compile Include="GetImage.cs" />
     <Compile Include="GoldPanning\GoldNuggets.cs" />
     <Compile Include="GoldPanning\GoldNuggetTrader.cs" />
@@ -103,6 +106,7 @@
       <Name>Server</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />

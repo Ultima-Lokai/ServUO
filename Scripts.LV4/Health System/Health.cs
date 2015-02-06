@@ -114,6 +114,9 @@ namespace Server.Health
                                 break;
                             }
                     }
+
+                    reader.Close();
+
                 } //// VALUES INSERTION end
                 catch (Exception e)
                 {
