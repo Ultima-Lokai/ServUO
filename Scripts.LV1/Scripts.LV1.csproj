@@ -52,6 +52,8 @@
     <Compile Include="Bible System\TopicParse.cs" />
     <Compile Include="Bible System\TopicReader.cs" />
     <Compile Include="Bible System\WanderingPreacher.cs" />
+    <Compile Include="Carousel.cs" />
+    <Compile Include="CastleCityAddon.cs" />
     <Compile Include="Fertilizer System\DungBucket.cs" />
     <Compile Include="Fertilizer System\DungPile.cs" />
     <Compile Include="Fertilizer System\DungShovel.cs" />
@@ -79,6 +81,13 @@
     <Compile Include="OverlayBackpackIdea\OverlayBackpack.cs" />
     <Compile Include="ProvingGroundAddon.cs" />
     <Compile Include="SearchImage.cs" />
+    <Compile Include="ShowToolBarSystem\ShowTool.cs" />
+    <Compile Include="ShowToolBarSystem\ShowToolAnimal.cs" />
+    <Compile Include="ShowToolBarSystem\ShowToolFour.cs" />
+    <Compile Include="ShowToolBarSystem\ShowToolHouse.cs" />
+    <Compile Include="ShowToolBarSystem\ShowToolShip.cs" />
+    <Compile Include="ShowToolBarSystem\ShowToolThree.cs" />
+    <Compile Include="ShowToolBarSystem\ShowToolTwo.cs" />
     <Compile Include="SkillBall.cs" />
     <Compile Include="StaticExporter.cs" />
     <Compile Include="Yard System\Core\ContextMenuEntries.cs" />
