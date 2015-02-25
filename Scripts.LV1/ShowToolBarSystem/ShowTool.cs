@@ -1,12 +1,31 @@
-﻿namespace Server.TimeSystem
-{
-    using Server.Gumps;
-    using Server.Mobiles;
-    using Server.Network;
-    using System;
+﻿using Server.Gumps;
+using Server.Mobiles;
+using Server.Network;
+using Server.Commands;
+using System;
 
+namespace Server.Gumps
+{
     public class ShowTool : Gump
     {
+        public static void Initialize()
+        {
+            CommandSystem.Register("ShowTool", AccessLevel.Player, OnShowTool);
+        }
+
+        [Usage("ShowTool")]
+        [Description("Display the Player Command ToolBar.")]
+        public static void OnShowTool(CommandEventArgs args)
+        {
+            Mobile mobile = args.Mobile;
+            if (mobile is PlayerMobile)
+            {
+                PlayerMobile pm = mobile as PlayerMobile;
+                pm.CloseGump(typeof(ShowTool));
+                pm.SendGump(new ShowTool(pm));
+            }
+        }
+
         private PlayerMobile pm;
 
         public ShowTool(PlayerMobile owner) : base(8, 15)
