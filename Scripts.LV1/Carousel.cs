@@ -89,9 +89,85 @@ namespace Server.Items
 			mZr = reader.ReadInt();
 			mPower = reader.ReadBool();
         }
-	
-	
-	////////////////////////
+
+        private struct CarouselSpot
+        {
+            private int mx;
+            private int my;
+            private Direction mfacing;
+
+            public int X
+            {
+                get { return mx; }
+            }
+
+            public int Y
+            {
+                get { return my; }
+            }
+
+            public Direction Facing
+            {
+                get { return mfacing; }
+            }
+
+            public CarouselSpot(int x, int y, Direction facing)
+            {
+                mx = x;
+                my = y;
+                mfacing = facing;
+            }
+        }
+
+        private List<CarouselSpot> CarouselSpots = new List<CarouselSpot>()
+        {
+            new CarouselSpot(9, 1, Direction.North),
+            new CarouselSpot(9, 3, Direction.North),
+            new CarouselSpot(9, -1, Direction.North),
+            new CarouselSpot(9, -3, Direction.Up),
+            new CarouselSpot(7, 1, Direction.South),
+            new CarouselSpot(7, 3, Direction.Left),
+            new CarouselSpot(7, 5, Direction.Right),
+            new CarouselSpot(7, -1, Direction.South),
+            new CarouselSpot(7, -3, Direction.South),
+            new CarouselSpot(7, -5, Direction.Up),
+            new CarouselSpot(5, 5, Direction.Left),
+            new CarouselSpot(5, 7, Direction.Right),
+            new CarouselSpot(5, -5, Direction.Down),
+            new CarouselSpot(5, -7, Direction.Up),
+            new CarouselSpot(3, 7, Direction.West),
+            new CarouselSpot(3, 9, Direction.Right),
+            new CarouselSpot(3, -7, Direction.Down),
+            new CarouselSpot(3, -9, Direction.West),
+            new CarouselSpot(1, 7, Direction.West),
+            new CarouselSpot(1, 9, Direction.East),
+            new CarouselSpot(1, -7, Direction.East),
+            new CarouselSpot(1, -9, Direction.West),
+            new CarouselSpot(-1, 7, Direction.West),
+            new CarouselSpot(-1, 9, Direction.East),
+            new CarouselSpot(-1, -7, Direction.East),
+            new CarouselSpot(-1, -9, Direction.West),
+            new CarouselSpot(-3, 7, Direction.Up),
+            new CarouselSpot(-3, 9, Direction.East),
+            new CarouselSpot(-3, -7, Direction.East),
+            new CarouselSpot(-3, -9, Direction.Left),
+            new CarouselSpot(-5, 5, Direction.Up),
+            new CarouselSpot(-5, 7, Direction.Down),
+            new CarouselSpot(-5, -5, Direction.Right),
+            new CarouselSpot(-5, -7, Direction.Left),
+            new CarouselSpot(-7, 1, Direction.North),
+            new CarouselSpot(-7, 3, Direction.North),
+            new CarouselSpot(-7, 5, Direction.Down),
+            new CarouselSpot(-7, -1, Direction.North),
+            new CarouselSpot(-7, -3, Direction.Right),
+            new CarouselSpot(-7, -5, Direction.Left),
+            new CarouselSpot(-9, 1, Direction.South),
+            new CarouselSpot(-9, 3, Direction.Down),
+            new CarouselSpot(-9, -1, Direction.South),
+            new CarouselSpot(-9, -3, Direction.South)
+        };
+
+        ////////////////////////
 		private class RecordLocation : Timer
 		{
 				private Carousel m_Carousel;
