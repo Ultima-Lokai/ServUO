@@ -242,14 +242,29 @@ namespace Server.Items
             }
         }
 
+        public override void OnDelete()
+        {
+            List<Mobile> mobilelist = new List<Mobile>();
+
+            foreach (Mobile mobile in this.GetMobilesInRange(10))
+            {
+                if (mobile is BaseCarouselMount)
+                    mobilelist.Add(mobile);
+                if (mobile is PlayerMobile && mobile.Mounted && mobile.Mount is BaseCarouselMount)
+                    mobilelist.Add(mobile);
+            }
+            base.OnDelete();
+        }
+
         private class CarouselMovement : Timer
         {
             private Carousel m_Carousel;
 
             public CarouselMovement(Carousel carousel)
-                : base(TimeSpan.FromSeconds(0.5))
+                : base(TimeSpan.FromSeconds(1.0))
             {
-                Priority = TimerPriority.FiftyMS; m_Carousel = carousel;
+                Priority = TimerPriority.FiftyMS; 
+                m_Carousel = carousel;
             }
 
             protected override void OnTick()
@@ -286,7 +301,6 @@ namespace Server.Items
                             loc = new Point3D(m_Carousel.Xr + CarouselInfo.OuterLoop[mount.LoopID].X, m_Carousel.Yr + CarouselInfo.OuterLoop[mount.LoopID].Y, m_Carousel.Zr);
                             facing = CarouselInfo.OuterLoop[mount.LoopID].Facing;
                         }
-                        mount.SetLocation(loc, false);
                         mount.X = loc.X;
                         mount.Y = loc.Y;
                         mount.Direction = facing;
@@ -308,7 +322,6 @@ namespace Server.Items
                             loc = new Point3D(m_Carousel.Xr + CarouselInfo.OuterLoop[mount.LoopID].X, m_Carousel.Yr + CarouselInfo.OuterLoop[mount.LoopID].Y, m_Carousel.Zr);
                             facing = CarouselInfo.OuterLoop[mount.LoopID].Facing;
                         }
-                        mobile.SetLocation(loc, false);
                         mobile.X = loc.X;
                         mobile.Y = loc.Y;
                         mobile.Direction = facing;

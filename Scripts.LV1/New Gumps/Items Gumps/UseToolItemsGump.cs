@@ -17,6 +17,11 @@ namespace Server.Gumps
         {
         }
 
+        public UseToolItemsGump(Mobile from)
+            : this(FindToolItems(from))
+        {
+        }
+
         public UseToolItemsGump(ArrayList buttons)
             : base("Which item would you like to use?", buttons)
         {
@@ -62,7 +67,8 @@ namespace Server.Gumps
             {
                 item = (Item)books[i];
                 ItemTileButtonInfo itbi = new ItemTileButtonInfo(item);
-                itbi.Label = new TextDefinition(string.Format("{0}: {1} Spells", item.Name,((Spellbook)item).SpellCount));
+                itbi.Label =
+                    new TextDefinition(string.Format("{0} Spellbook: {1} Spells", ((Spellbook) item).SpellbookType, ((Spellbook) item).SpellCount));
                 list2.Add(itbi);
             }
             return list2;

@@ -101,7 +101,7 @@ namespace Server.Gumps
                 case 6:
                     pm.CloseGump(typeof(SecShowToolTwo));
                     pm.SendGump(new SecShowToolTwo(pm));
-                    pm.SendGump(new UseToolItemsGump(UseToolItemsGump.FindToolItems(pm)));
+                    pm.SendGump(new UseToolItemsGump(pm));
                     return;
 
                 case 7:

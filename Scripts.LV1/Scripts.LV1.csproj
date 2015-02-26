@@ -52,7 +52,7 @@
     <Compile Include="Bible System\TopicParse.cs" />
     <Compile Include="Bible System\TopicReader.cs" />
     <Compile Include="Bible System\WanderingPreacher.cs" />
-    <Compile Include="Carousel.cs" />
+    <Compile Include="TheWonderfulCarousel\Carousel.cs" />
     <Compile Include="CastleCityAddon.cs" />
     <Compile Include="Enhancement Deeds\AosEnhancementDeed.cs" />
     <Compile Include="Enhancement Deeds\ArmorEnhancementDeed.cs" />

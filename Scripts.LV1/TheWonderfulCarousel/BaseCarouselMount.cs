@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Server.Commands;
 using Server.Gumps;
 using Server.Network;
 using Server.Items;
@@ -23,13 +22,13 @@ namespace Server.Mobiles
         public BaseCarouselMount(string name, int bodyID, int itemID, AIType aiType, FightMode fightMode, int rangePerception, int rangeFight, double activeSpeed, double passiveSpeed)
             : base(aiType, fightMode, rangePerception, rangeFight, activeSpeed, passiveSpeed)
         {
-            this.Name = name;
-            this.Body = bodyID;
-            this.Frozen = true;
-            this.CantWalk = true;
-            this.Tamable = false;
+            Name = name;
+            Body = bodyID;
+            Frozen = true;
+            CantWalk = true;
+            Tamable = false;
 
-            this.m_InternalItem = new CarouselMountItem(this, itemID);
+            m_InternalItem = new CarouselMountItem(this, itemID);
         }
 
         public override bool IsDispellable
@@ -54,32 +53,50 @@ namespace Server.Mobiles
                 return TimeSpan.Zero;
             }
         }
+
         [CommandProperty(AccessLevel.GameMaster)]
         public DateTime NextMountAbility
         {
             get
             {
-                return this.m_NextMountAbility;
+                return m_NextMountAbility;
             }
             set
             {
-                this.m_NextMountAbility = value;
+                m_NextMountAbility = value;
             }
         }
+
         public virtual bool AllowMaleRider
         {
             get
             {
+                foreach (Mobile mobile in Owners)
+                {
+                    if (mobile.Combatant != null && mobile.InRange(this.Location, 2))
+                    {
+                        return false;
+                    }
+                }
                 return true;
             }
         }
+
         public virtual bool AllowFemaleRider
         {
             get
             {
+                foreach (Mobile mobile in Owners)
+                {
+                    if (mobile.Combatant != null && mobile.InRange(this.Location, 2))
+                    {
+                        return false;
+                    }
+                }
                 return true;
             }
         }
+
         [Hue, CommandProperty(AccessLevel.GameMaster)]
         public override int Hue
         {
@@ -91,8 +108,8 @@ namespace Server.Mobiles
             {
                 base.Hue = value;
 
-                if (this.m_InternalItem != null)
-                    this.m_InternalItem.Hue = value;
+                if (m_InternalItem != null)
+                    m_InternalItem.Hue = value;
             }
         }
         [CommandProperty(AccessLevel.GameMaster)]
@@ -100,15 +117,15 @@ namespace Server.Mobiles
         {
             get
             {
-                if (this.m_InternalItem != null)
-                    return this.m_InternalItem.ItemID;
+                if (m_InternalItem != null)
+                    return m_InternalItem.ItemID;
                 else
                     return 0;
             }
             set
             {
-                if (this.m_InternalItem != null)
-                    this.m_InternalItem.ItemID = value;
+                if (m_InternalItem != null)
+                    m_InternalItem.ItemID = value;
             }
         }
         [CommandProperty(AccessLevel.GameMaster)]
@@ -116,46 +133,46 @@ namespace Server.Mobiles
         {
             get
             {
-                return this.m_Rider;
+                return m_Rider;
             }
             set
             {
-                if (this.m_Rider != value)
+                if (m_Rider != value)
                 {
                     if (value == null)
                     {
-                        Point3D loc = this.m_Rider.Location;
-                        Map map = this.m_Rider.Map;
+                        Point3D loc = m_Rider.Location;
+                        Map map = m_Rider.Map;
 
                         if (map == null || map == Map.Internal)
                         {
-                            loc = this.m_Rider.LogoutLocation;
-                            map = this.m_Rider.LogoutMap;
+                            loc = m_Rider.LogoutLocation;
+                            map = m_Rider.LogoutMap;
                         }
 
-                        this.Direction = this.m_Rider.Direction;
-                        this.Location = loc;
-                        this.Map = map;
+                        Direction = m_Rider.Direction;
+                        Location = loc;
+                        Map = map;
 
-                        if (this.m_InternalItem != null)
-                            this.m_InternalItem.Internalize();
+                        if (m_InternalItem != null)
+                            m_InternalItem.Internalize();
                     }
                     else
                     {
-                        if (this.m_Rider != null)
-                            Dismount(this.m_Rider);
+                        if (m_Rider != null)
+                            Dismount(m_Rider);
 
                         Dismount(value);
 
-                        if (this.m_InternalItem != null)
-                            value.AddItem(this.m_InternalItem);
+                        if (m_InternalItem != null)
+                            value.AddItem(m_InternalItem);
 
-                        value.Direction = this.Direction;
+                        value.Direction = Direction;
 
-                        this.Internalize();
+                        Internalize();
                     }
 
-                    this.m_Rider = value;
+                    m_Rider = value;
                 }
             }
         }
@@ -164,15 +181,23 @@ namespace Server.Mobiles
         {
             get
             {
-                return this.m_InternalItem;
+                return m_InternalItem;
             }
         }
 
         public override void OnThink()
         {
+            bool hasCarousel = false;
             if (Rider == null)
             {
-                
+                foreach (Item item in this.GetItemsInRange(10))
+                {
+                    if (item is Carousel)
+                    {
+                        hasCarousel = true;
+                    }
+                }
+                if (!hasCarousel) Delete();
             }
         }
 
@@ -319,32 +344,35 @@ namespace Server.Mobiles
 
             writer.Write((int)1); // version
 
-            writer.Write(this.m_NextMountAbility);
+            writer.Write((int)m_Loop);
+            writer.Write((int)m_LoopID);
 
-            writer.Write(this.m_Rider);
-            writer.Write(this.m_InternalItem);
+            writer.Write(m_NextMountAbility);
+
+            writer.Write(m_Rider);
+            writer.Write(m_InternalItem);
         }
 
         public override bool OnBeforeDeath()
         {
-            this.Rider = null;
+            Rider = null;
 
             return base.OnBeforeDeath();
         }
 
         public override void OnAfterDelete()
         {
-            if (this.m_InternalItem != null)
-                this.m_InternalItem.Delete();
+            if (m_InternalItem != null)
+                m_InternalItem.Delete();
 
-            this.m_InternalItem = null;
+            m_InternalItem = null;
 
             base.OnAfterDelete();
         }
 
         public override void OnDelete()
         {
-            this.Rider = null;
+            Rider = null;
 
             base.OnDelete();
         }
@@ -355,24 +383,29 @@ namespace Server.Mobiles
 
             int version = reader.ReadInt();
 
-            switch ( version )
+            switch (version)
             {
                 case 1:
-                    {
-                        this.m_NextMountAbility = reader.ReadDateTime();
-                        goto case 0;
-                    }
+                {
+                    m_Loop = (CarouselLoop) reader.ReadInt();
+                    m_LoopID = reader.ReadInt();
+                    m_NextMountAbility = reader.ReadDateTime();
+                    goto case 0;
+                }
                 case 0:
-                    {
-                        this.m_Rider = reader.ReadMobile();
-                        this.m_InternalItem = reader.ReadItem();
+                {
+                    m_Rider = reader.ReadMobile();
+                    m_InternalItem = reader.ReadItem();
 
-                        if (this.m_InternalItem == null)
-                            this.Delete();
+                    if (m_InternalItem == null)
+                        Delete();
 
-                        break;
-                    }
+                    break;
+                }
             }
+            Frozen = true;
+            CantWalk = true;
+            Tamable = false;
         }
 
         public virtual void OnDisallowedRider(Mobile m)
@@ -387,11 +420,12 @@ namespace Server.Mobiles
 
             if (from is PlayerMobile)
             {
+                PlayerMobile pm = (PlayerMobile)from;
                 if (from.IsBodyMod && !from.Body.IsHuman)
                 {
                     if (Core.AOS) // You cannot ride a mount in your current form.
                         this.PrivateOverheadMessage(Network.MessageType.Regular, 0x3B2, false,
-                            "You cannot ride the carousel if your current form.", from.NetState);
+                            "You cannot ride the carousel in your current form.", from.NetState);
                     else
                         from.SendLocalizedMessage(1061628); // You can't do that while polymorphed.
 
@@ -429,12 +463,23 @@ namespace Server.Mobiles
                     return;
                 }
 
-                if (from.InRange(this, 1))
+                if (from.InRange(this, 2))
                 {
-                    from.Location = this.Location;
-                    from.Paralyzed = true;
-                    from.SendGump(new RideCarousel((PlayerMobile)from, this));
-                    this.Rider = from;
+                    Carousel carousel = null;
+                    foreach (Item item in this.GetItemsInRange(10))
+                    {
+                        if (item is Carousel)
+                        {
+                            carousel = (Carousel)item;
+                        }
+                    }
+                    if (carousel != null)
+                    {
+                        from.Location = this.Location;
+                        from.Paralyzed = true;
+                        from.SendGump(new RideCarousel(carousel, (PlayerMobile) from, this));
+                        this.Rider = from;
+                    }
                 }
                 else
                 {
@@ -446,20 +491,22 @@ namespace Server.Mobiles
         {
             private PlayerMobile pm;
             private BaseCarouselMount bcm;
+            private Carousel carousel;
 
-            public RideCarousel(PlayerMobile owner, BaseCarouselMount mount)
-                : base(40, 45)
+            public RideCarousel(Carousel obj, PlayerMobile owner, BaseCarouselMount mount)
+                : base(60, 75)
             {
+                carousel = obj;
                 pm = owner;
                 bcm = mount;
                 Closable = false;
                 Disposable = false;
                 Dragable = true;
-                Resizable = true;
+                Resizable = false;
                 AddPage(0);
-                AddBackground(0, 13, 300, 30, 0x2422);
-                AddLabel(8, 10, 777, "Click to get off the carousel.");
-                AddButton(8, 0x13, 0x15a5, 0x15a2, 1, GumpButtonType.Reply, 0);
+                AddBackground(0, 13, 340, 40, 0x2422);
+                AddLabel(22, 20, 777, "Dismount, then click here to get off the carousel.");
+                AddButton(2, 20, 0x15a5, 0x15a2, 1, GumpButtonType.Reply, 0);
             }
 
             public override void OnResponse(NetState state, RelayInfo info)
@@ -470,8 +517,18 @@ namespace Server.Mobiles
                         break;
 
                     case 1:
+                        if (pm.Mounted && pm.Mount is BaseCarouselMount)
+                        {
+                            pm.SendMessage("You must dismount before getting down off the carousel.");
+                            pm.SendGump(new RideCarousel(carousel, pm, bcm));
+                            break;
+                        }
                         pm.CloseGump(typeof(RideCarousel));
                         if (pm.Paralyzed) pm.Paralyzed = false;
+                        pm.SendMessage("You get off the Carousel.");
+                        pm.X = carousel.X + 1;
+                        pm.Y = carousel.Y + 1;
+                        pm.Z = carousel.Z;
                         break;
 
                     default:
