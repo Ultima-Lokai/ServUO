@@ -11,6 +11,7 @@ namespace Server.Gumps
 {
     public class UseToolItemsGump : BaseItemTileButtonsGump
     {
+
         public UseToolItemsGump(ItemTileButtonInfo[] buttons)
             : base("Which item would you like to use?", buttons)
         {
@@ -74,6 +75,7 @@ namespace Server.Gumps
             if ((m != null) && item.IsChildOf(m.Backpack))
             {
                 item.OnDoubleClick(m);
+                m.SendGump(new UseToolItemsGump(Buttons));
             }
         }
     }

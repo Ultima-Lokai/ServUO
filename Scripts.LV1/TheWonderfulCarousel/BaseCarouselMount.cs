@@ -3,6 +3,7 @@ using System.Collections;
 using Server.Commands;
 using Server.Gumps;
 using Server.Network;
+using Server.Items;
 
 namespace Server.Mobiles
 {
@@ -12,6 +13,12 @@ namespace Server.Mobiles
         private Mobile m_Rider;
         private Item m_InternalItem;
         private DateTime m_NextMountAbility;
+        private CarouselLoop m_Loop;
+        private int m_LoopID;
+
+        public CarouselLoop Loop { get { return m_Loop; } set { m_Loop = value; } }
+
+        public int LoopID { get { return m_LoopID; } set { m_LoopID = value; } }
 
         public BaseCarouselMount(string name, int bodyID, int itemID, AIType aiType, FightMode fightMode, int rangePerception, int rangeFight, double activeSpeed, double passiveSpeed)
             : base(aiType, fightMode, rangePerception, rangeFight, activeSpeed, passiveSpeed)

@@ -54,6 +54,14 @@
     <Compile Include="Bible System\WanderingPreacher.cs" />
     <Compile Include="Carousel.cs" />
     <Compile Include="CastleCityAddon.cs" />
+    <Compile Include="Enhancement Deeds\AosEnhancementDeed.cs" />
+    <Compile Include="Enhancement Deeds\ArmorEnhancementDeed.cs" />
+    <Compile Include="Enhancement Deeds\ElementEnhancementDeed.cs" />
+    <Compile Include="Enhancement Deeds\EnhancementDeed.cs" />
+    <Compile Include="Enhancement Deeds\EnhancementDeedStone.cs" />
+    <Compile Include="Enhancement Deeds\EnhancementUtility.cs" />
+    <Compile Include="Enhancement Deeds\SkillEnhancementDeed.cs" />
+    <Compile Include="Enhancement Deeds\WeaponEnhancementDeed.cs" />
     <Compile Include="Fertilizer System\DungBucket.cs" />
     <Compile Include="Fertilizer System\DungPile.cs" />
     <Compile Include="Fertilizer System\DungShovel.cs" />

@@ -1,25 +1,18 @@
 using System;
 using Server.Items;
 
-namespace Server.Mobiles
+namespace Server.Custom
 {
-    [CorpseName("a broken carousel unicorn")]
-    public class CarouselUnicorn : BaseCarouselMount
+    public class ElementEnhancementDeed : EnhancementDeed
     {
         [Constructable]
-        public CarouselUnicorn()
-            : this("a carousel unicorn")
+        public ElementEnhancementDeed()
+            : base(EnhancementType.Element, 0)
         {
+            Name = "an Element Enhancement Deed";
         }
 
-        [Constructable]
-        public CarouselUnicorn(string name)
-            : base(name, 0x7A, 0x3EB4, AIType.AI_Animal, FightMode.None, 0, 0, 0, 0)
-        {
-            this.BaseSoundID = 0x4BC;
-        }
-
-        public CarouselUnicorn(Serial serial)
+        public ElementEnhancementDeed(Serial serial)
             : base(serial)
         {
         }
@@ -37,5 +30,6 @@ namespace Server.Mobiles
 
             int version = reader.ReadInt();
         }
+
     }
 }

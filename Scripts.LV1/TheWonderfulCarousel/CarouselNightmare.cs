@@ -14,36 +14,9 @@ namespace Server.Mobiles
 
         [Constructable]
         public CarouselNightmare(string name)
-            : base(name, 0x74, 0x3EA7, AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(name, 0x74, 0x3EA7, AIType.AI_Animal, FightMode.None, 0, 0, 0, 0)
         {
             this.BaseSoundID = Core.AOS ? 0xA8 : 0x16A;
-
-            this.SetStr(496, 525);
-            this.SetDex(86, 105);
-            this.SetInt(86, 125);
-
-            this.SetHits(298, 315);
-
-            this.SetDamage(16, 22);
-
-            this.SetDamageType(ResistanceType.Physical, 40);
-            this.SetDamageType(ResistanceType.Fire, 40);
-            this.SetDamageType(ResistanceType.Energy, 20);
-
-            this.SetResistance(ResistanceType.Physical, 55, 65);
-            this.SetResistance(ResistanceType.Fire, 30, 40);
-            this.SetResistance(ResistanceType.Cold, 30, 40);
-            this.SetResistance(ResistanceType.Poison, 30, 40);
-            this.SetResistance(ResistanceType.Energy, 20, 30);
-
-            this.SetSkill(SkillName.EvalInt, 10.4, 50.0);
-            this.SetSkill(SkillName.Magery, 10.4, 50.0);
-            this.SetSkill(SkillName.MagicResist, 85.3, 100.0);
-            this.SetSkill(SkillName.Tactics, 97.6, 100.0);
-            this.SetSkill(SkillName.Wrestling, 80.5, 92.5);
-
-            this.Fame = 14000;
-            this.Karma = -14000;
 
             switch ( Utility.Random(3) )
             {
