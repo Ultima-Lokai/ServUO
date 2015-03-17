@@ -59,8 +59,8 @@ namespace Server.Gumps
                 ImageTileButtonInfo b = buttons[i];
 
                 AddImageTiledButton(innerX, innerY, 0x918, 0x919, 100 + i, GumpButtonType.Reply, 0, b.ItemID, b.Hue,
-                    15, 10, b.LocalizedTooltip);
-                TextDefinition.AddHtmlText(this, innerX + 84, innerY, 250, 60, b.Label, false, false, 0x7FFF, 0xFFFFFF);
+                    15, 10, -1, b.Label.ToString());
+                //TextDefinition.AddHtmlText(this, innerX + 84, innerY, 250, 60, b.Label, false, false, 0x7FFF, 0xFFFFFF);
             }
         }
 

@@ -27,6 +27,16 @@ namespace Server.Gumps
         {
         }
 
+        protected override int XItems
+        {
+            get { return 5; }
+        }
+
+        protected override int YItems
+        {
+            get { return 6; }
+        }
+
         public static ArrayList FindToolItems(Mobile m)
         {
             Container backpack = m.Backpack;
