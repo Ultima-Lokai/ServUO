@@ -4,32 +4,34 @@ using Server.Items;
 
 namespace Server.Items
 {
-    public class HonorTileEastAddon : BaseAddon
+    public class HonestyTileAddon : BaseAddon
     {
         public override BaseAddonDeed Deed
         {
             get
             {
-                return new HonorTileEastAddonDeed();
+                return new HonestyTileAddonDeed();
             }
         }
 
+        public override int LabelNumber { get { return 1012016; } } // Honesty
+
         [ Constructable ]
-        public HonorTileEastAddon()
+        public HonestyTileAddon()
         {
 			VirtueTileComponent ac;
-			ac = new VirtueTileComponent( 5319 );
+			ac = new VirtueTileComponent( 5279 );
 			AddComponent( ac, 0, 0, 0 );
-			ac = new VirtueTileComponent( 5320 );
+			ac = new VirtueTileComponent( 5280 );
 			AddComponent( ac, 0, 1, 0 );
-			ac = new VirtueTileComponent( 5321 );
+			ac = new VirtueTileComponent( 5281 );
 			AddComponent( ac, 1, 1, 0 );
-			ac = new VirtueTileComponent( 5322 );
+			ac = new VirtueTileComponent( 5282 );
 			AddComponent( ac, 1, 0, 0 );
 
         }
 
-        public HonorTileEastAddon( Serial serial ) : base( serial )
+        public HonestyTileAddon( Serial serial ) : base( serial )
         {
         }
 
@@ -46,23 +48,24 @@ namespace Server.Items
         }
     }
 
-    public class HonorTileEastAddonDeed : BaseAddonDeed
+    public class HonestyTileAddonDeed : BaseAddonDeed
     {
         public override BaseAddon Addon
         {
             get
             {
-                return new HonorTileEastAddon();
+                return new HonestyTileAddon();
             }
         }
 
+        public override int LabelNumber { get { return 1080488; } } // Honesty Virtue Tile Deed
+
         [Constructable]
-        public HonorTileEastAddonDeed()
+        public HonestyTileAddonDeed()
         {
-            Name = "HonorTileEast";
         }
 
-        public HonorTileEastAddonDeed( Serial serial ) : base( serial )
+        public HonestyTileAddonDeed( Serial serial ) : base( serial )
         {
         }
 

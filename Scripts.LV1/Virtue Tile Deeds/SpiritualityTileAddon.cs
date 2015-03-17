@@ -4,32 +4,34 @@ using Server.Items;
 
 namespace Server.Items
 {
-    public class HumilityTileSouthAddon : BaseAddon
+    public class SpiritualityTileAddon : BaseAddon
     {
         public override BaseAddonDeed Deed
         {
             get
             {
-                return new HumilityTileSouthAddonDeed();
+                return new SpiritualityTileAddonDeed();
             }
         }
 
+        public override int LabelNumber { get { return 1012021; } } // Spirituality
+
         [ Constructable ]
-        public HumilityTileSouthAddon()
+        public SpiritualityTileAddon()
         {
 			VirtueTileComponent ac;
-			ac = new VirtueTileComponent( 5331 );
+			ac = new VirtueTileComponent( 5311 );
 			AddComponent( ac, 0, 0, 0 );
-			ac = new VirtueTileComponent( 5332 );
-			AddComponent( ac, 0, 1, 0 );
-			ac = new VirtueTileComponent( 5333 );
-			AddComponent( ac, 1, 1, 0 );
-			ac = new VirtueTileComponent( 5334 );
+			ac = new VirtueTileComponent( 5314 );
 			AddComponent( ac, 1, 0, 0 );
+			ac = new VirtueTileComponent( 5312 );
+			AddComponent( ac, 0, 1, 0 );
+			ac = new VirtueTileComponent( 5313 );
+			AddComponent( ac, 1, 1, 0 );
 
         }
 
-        public HumilityTileSouthAddon( Serial serial ) : base( serial )
+        public SpiritualityTileAddon( Serial serial ) : base( serial )
         {
         }
 
@@ -37,7 +39,6 @@ namespace Server.Items
         {
             base.Serialize( writer );
             writer.Write( 0 ); // Version
-            Components[1].ItemID += 4;
         }
 
         public override void Deserialize( GenericReader reader )
@@ -47,23 +48,24 @@ namespace Server.Items
         }
     }
 
-    public class HumilityTileSouthAddonDeed : BaseAddonDeed
+    public class SpiritualityTileAddonDeed : BaseAddonDeed
     {
         public override BaseAddon Addon
         {
             get
             {
-                return new HumilityTileSouthAddon();
+                return new SpiritualityTileAddon();
             }
         }
 
+        public override int LabelNumber { get { return 1080484; } } // Spirituality Virtue Tile Deed
+
         [Constructable]
-        public HumilityTileSouthAddonDeed()
+        public SpiritualityTileAddonDeed()
         {
-            Name = "HumilityTileSouth";
         }
 
-        public HumilityTileSouthAddonDeed( Serial serial ) : base( serial )
+        public SpiritualityTileAddonDeed( Serial serial ) : base( serial )
         {
         }
 

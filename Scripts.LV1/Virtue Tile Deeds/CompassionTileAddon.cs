@@ -4,32 +4,34 @@ using Server.Items;
 
 namespace Server.Items
 {
-    public class SacrificeTileEastAddon : BaseAddon
+    public class CompassionTileAddon : BaseAddon
     {
         public override BaseAddonDeed Deed
         {
             get
             {
-                return new SacrificeTileEastAddonDeed();
+                return new CompassionTileAddonDeed();
             }
         }
 
+        public override int LabelNumber { get { return 1012015; } } // Compassion Virtue Tile Deed
+
         [ Constructable ]
-        public SacrificeTileEastAddon()
+        public CompassionTileAddon()
         {
 			VirtueTileComponent ac;
-			ac = new VirtueTileComponent( 5386 );
+			ac = new VirtueTileComponent( 5287 );
 			AddComponent( ac, 0, 0, 0 );
-			ac = new VirtueTileComponent( 5387 );
+			ac = new VirtueTileComponent( 5288 );
 			AddComponent( ac, 0, 1, 0 );
-			ac = new VirtueTileComponent( 5388 );
+			ac = new VirtueTileComponent( 5289 );
 			AddComponent( ac, 1, 1, 0 );
-			ac = new VirtueTileComponent( 5389 );
+			ac = new VirtueTileComponent( 5290 );
 			AddComponent( ac, 1, 0, 0 );
 
         }
 
-        public SacrificeTileEastAddon( Serial serial ) : base( serial )
+        public CompassionTileAddon( Serial serial ) : base( serial )
         {
         }
 
@@ -46,23 +48,24 @@ namespace Server.Items
         }
     }
 
-    public class SacrificeTileEastAddonDeed : BaseAddonDeed
+    public class CompassionTileAddonDeed : BaseAddonDeed
     {
         public override BaseAddon Addon
         {
             get
             {
-                return new SacrificeTileEastAddon();
+                return new CompassionTileAddon();
             }
         }
 
+        public override int LabelNumber { get { return 1080481; } } // Compassion Virtue Tile Deed
+
         [Constructable]
-        public SacrificeTileEastAddonDeed()
+        public CompassionTileAddonDeed()
         {
-            Name = "SacrificeTileEast";
         }
 
-        public SacrificeTileEastAddonDeed( Serial serial ) : base( serial )
+        public CompassionTileAddonDeed( Serial serial ) : base( serial )
         {
         }
 

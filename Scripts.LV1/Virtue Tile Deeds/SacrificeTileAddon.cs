@@ -4,32 +4,34 @@ using Server.Items;
 
 namespace Server.Items
 {
-    public class CompassionTileEastAddon : BaseAddon
+    public class SacrificeTileAddon : BaseAddon
     {
         public override BaseAddonDeed Deed
         {
             get
             {
-                return new CompassionTileEastAddonDeed();
+                return new SacrificeTileAddonDeed();
             }
         }
 
+        public override int LabelNumber { get { return 1012020; } } // Sacrifice
+
+
         [ Constructable ]
-        public CompassionTileEastAddon()
+        public SacrificeTileAddon()
         {
 			VirtueTileComponent ac;
-			ac = new VirtueTileComponent( 5287 );
+			ac = new VirtueTileComponent( 5386 );
 			AddComponent( ac, 0, 0, 0 );
-			ac = new VirtueTileComponent( 5288 );
+			ac = new VirtueTileComponent( 5387 );
 			AddComponent( ac, 0, 1, 0 );
-			ac = new VirtueTileComponent( 5289 );
+			ac = new VirtueTileComponent( 5388 );
 			AddComponent( ac, 1, 1, 0 );
-			ac = new VirtueTileComponent( 5290 );
+			ac = new VirtueTileComponent( 5389 );
 			AddComponent( ac, 1, 0, 0 );
-
         }
 
-        public CompassionTileEastAddon( Serial serial ) : base( serial )
+        public SacrificeTileAddon( Serial serial ) : base( serial )
         {
         }
 
@@ -46,23 +48,23 @@ namespace Server.Items
         }
     }
 
-    public class CompassionTileEastAddonDeed : BaseAddonDeed
+    public class SacrificeTileAddonDeed : BaseAddonDeed
     {
         public override BaseAddon Addon
         {
             get
             {
-                return new CompassionTileEastAddon();
+                return new SacrificeTileAddon();
             }
         }
+        public override int LabelNumber { get { return 1080482; } }
 
         [Constructable]
-        public CompassionTileEastAddonDeed()
+        public SacrificeTileAddonDeed()
         {
-            Name = "CompassionTileEast";
         }
 
-        public CompassionTileEastAddonDeed( Serial serial ) : base( serial )
+        public SacrificeTileAddonDeed( Serial serial ) : base( serial )
         {
         }
 

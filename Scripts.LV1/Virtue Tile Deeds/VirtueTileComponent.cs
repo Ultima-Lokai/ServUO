@@ -1,6 +1,7 @@
 ﻿using System;
 using Server;
 using Server.Items;
+using Server.Multis;
 
 namespace Server.Items
 {
@@ -14,9 +15,22 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-            foreach (AddonComponent ac in Addon.Components)
+            bool canflip = from.AccessLevel >= AccessLevel.Decorator;
+            BaseHouse house = Multis.BaseHouse.FindHouseAt(from);
+            if (house != null && house.Owner == from) canflip = true;
+            if (canflip)
             {
-
+                foreach (AddonComponent ac in Addon.Components)
+                {
+                    if (Addon is SacrificeTileAddon)
+                    {
+                        ac.ItemID = (ac.ItemID - 5378)%8 > 3 ? ac.ItemID - 4 : ac.ItemID + 4;
+                    }
+                    else
+                    {
+                        ac.ItemID = (ac.ItemID - 5271)%8 > 3 ? ac.ItemID - 4 : ac.ItemID + 4;
+                    }
+                }
             }
         }
 

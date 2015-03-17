@@ -4,32 +4,34 @@ using Server.Items;
 
 namespace Server.Items
 {
-    public class JusticeTileSouthAddon : BaseAddon
+    public class ValorTileAddon : BaseAddon
     {
         public override BaseAddonDeed Deed
         {
             get
             {
-                return new JusticeTileSouthAddonDeed();
+                return new ValorTileAddonDeed();
             }
         }
 
+        public override int LabelNumber { get { return 1012022; } } // Valor
+
         [ Constructable ]
-        public JusticeTileSouthAddon()
+        public ValorTileAddon()
         {
 			VirtueTileComponent ac;
-			ac = new VirtueTileComponent( 5299 );
+			ac = new VirtueTileComponent( 5303 );
 			AddComponent( ac, 0, 0, 0 );
-			ac = new VirtueTileComponent( 5300 );
+			ac = new VirtueTileComponent( 5304 );
 			AddComponent( ac, 0, 1, 0 );
-			ac = new VirtueTileComponent( 5301 );
+			ac = new VirtueTileComponent( 5305 );
 			AddComponent( ac, 1, 1, 0 );
-			ac = new VirtueTileComponent( 5302 );
+			ac = new VirtueTileComponent( 5306 );
 			AddComponent( ac, 1, 0, 0 );
 
         }
 
-        public JusticeTileSouthAddon( Serial serial ) : base( serial )
+        public ValorTileAddon( Serial serial ) : base( serial )
         {
         }
 
@@ -46,23 +48,24 @@ namespace Server.Items
         }
     }
 
-    public class JusticeTileSouthAddonDeed : BaseAddonDeed
+    public class ValorTileAddonDeed : BaseAddonDeed
     {
         public override BaseAddon Addon
         {
             get
             {
-                return new JusticeTileSouthAddon();
+                return new ValorTileAddon();
             }
         }
 
+        public override int LabelNumber { get { return 1080486; } } // Valor Virtue Tile Deed
+
         [Constructable]
-        public JusticeTileSouthAddonDeed()
+        public ValorTileAddonDeed()
         {
-            Name = "JusticeTileSouth";
         }
 
-        public JusticeTileSouthAddonDeed( Serial serial ) : base( serial )
+        public ValorTileAddonDeed( Serial serial ) : base( serial )
         {
         }
 

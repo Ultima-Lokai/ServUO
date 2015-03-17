@@ -4,32 +4,34 @@ using Server.Items;
 
 namespace Server.Items
 {
-    public class ValorTileEastAddon : BaseAddon
+    public class HonorTileAddon : BaseAddon
     {
         public override BaseAddonDeed Deed
         {
             get
             {
-                return new ValorTileEastAddonDeed();
+                return new HonorTileAddonDeed();
             }
         }
 
+        public override int LabelNumber { get { return 1012017; } } // Honor
+
         [ Constructable ]
-        public ValorTileEastAddon()
+        public HonorTileAddon()
         {
 			VirtueTileComponent ac;
-			ac = new VirtueTileComponent( 5303 );
+			ac = new VirtueTileComponent( 5319 );
 			AddComponent( ac, 0, 0, 0 );
-			ac = new VirtueTileComponent( 5304 );
+			ac = new VirtueTileComponent( 5320 );
 			AddComponent( ac, 0, 1, 0 );
-			ac = new VirtueTileComponent( 5305 );
+			ac = new VirtueTileComponent( 5321 );
 			AddComponent( ac, 1, 1, 0 );
-			ac = new VirtueTileComponent( 5306 );
+			ac = new VirtueTileComponent( 5322 );
 			AddComponent( ac, 1, 0, 0 );
 
         }
 
-        public ValorTileEastAddon( Serial serial ) : base( serial )
+        public HonorTileAddon( Serial serial ) : base( serial )
         {
         }
 
@@ -46,24 +48,24 @@ namespace Server.Items
         }
     }
 
-    public class ValorTileEastAddonDeed : BaseAddonDeed
+    public class HonorTileAddonDeed : BaseAddonDeed
     {
         public override BaseAddon Addon
         {
             get
             {
-                return new ValorTileEastAddon();
+                return new HonorTileAddon();
             }
         }
 
-        public override int LabelNumber { get { return 1080487; } }
+        public override int LabelNumber { get { return 1080485; } } // Honor Virtue Tile Deed
 
         [Constructable]
-        public ValorTileEastAddonDeed()
+        public HonorTileAddonDeed()
         {
         }
 
-        public ValorTileEastAddonDeed( Serial serial ) : base( serial )
+        public HonorTileAddonDeed( Serial serial ) : base( serial )
         {
         }
 
